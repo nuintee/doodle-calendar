@@ -8,6 +8,10 @@ const manifest = defineManifest({
   description:
     "Add the reading time to Chrome Extension documentation articles",
   version: "1.0",
+  permissions: ["activeTab", "scripting"],
+  action: {
+    default_popup: "index.html",
+  },
   content_scripts: [
     {
       js: ["src/scripts/content.ts"],

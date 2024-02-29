@@ -8,3 +8,15 @@ const observer = new MutationObserver(function () {
 });
 observer.observe(document.documentElement, { childList: true });
 console.log(insertedNodes);
+
+chrome.runtime.onMessage.addListener(function (request) {
+  const value = JSON.parse(request)?.value;
+
+  const input = document.querySelector('input[aria-label="タイトルを追加"]');
+
+  console.log({ input, value });
+
+  if (!input || !value) return;
+
+  (input as HTMLInputElement).value = value;
+});
