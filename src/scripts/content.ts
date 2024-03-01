@@ -1,13 +1,14 @@
 const OPTIONS = ["📈 SquadBeyond", "👨‍⚕️ TEN"];
 
-const insertedNodes: Node[] = [];
-const observer = new MutationObserver(function () {
-  const input = document.querySelector('input[aria-label="タイトルを追加"]');
+const getInputDOM = () => {
+  return document.querySelector(
+    'input[aria-label="タイトルを追加"]'
+  ) as HTMLInputElement | null;
+};
 
-  if (!input) return;
-
+const createSelector = (options: string[]) => {
   const selector = document.createElement("select");
-  OPTIONS.forEach((value) => {
+  options.forEach((value) => {
     const option = document.createElement("option");
     option.value = value;
     option.innerHTML = value;
@@ -15,26 +16,35 @@ const observer = new MutationObserver(function () {
     selector.appendChild(option);
   });
 
+  selector.onchange = (e) => {
+    const input = getInputDOM();
+    const target = e.target as HTMLSelectElement;
+
+    if (!input || input.value.includes(target.value)) return;
+
+    input.value = `${target.value} ${input.value}`;
+  };
+
+  return selector;
+};
+
+const observer = new MutationObserver(function () {
+  const input = getInputDOM();
+
+  if (!input) return;
+
+  const selector = createSelector(OPTIONS);
+
   const parentLabel = input.parentElement;
-
-  if (parentLabel) {
-    parentLabel.style.paddingLeft = "1rem";
-  }
-
-  selector.onchange = (e) =>
-    ((input as HTMLInputElement).value = (
-      e?.target as HTMLSelectElement
-    )?.value);
-
   parentLabel?.appendChild(selector);
 });
+
 observer.observe(document.documentElement, { childList: true });
-console.log(insertedNodes);
 
 chrome.runtime.onMessage.addListener(function (request) {
   const value = JSON.parse(request)?.value;
 
-  const input = document.querySelector('input[aria-label="タイトルを追加"]');
+  const input = getInputDOM();
 
   if (!input || !value) return;
 
