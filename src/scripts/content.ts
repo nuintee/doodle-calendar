@@ -1,5 +1,3 @@
-const OPTIONS = ["📈 SquadBeyond", "👨‍⚕️ TEN"];
-
 const getInputDOM = () => {
   return document.querySelector(
     'input[aria-label="タイトルを追加"]'
@@ -8,6 +6,7 @@ const getInputDOM = () => {
 
 const createSelector = (options: string[]) => {
   const selector = document.createElement("select");
+
   options.forEach((value) => {
     const option = document.createElement("option");
     option.value = value;
@@ -28,12 +27,14 @@ const createSelector = (options: string[]) => {
   return selector;
 };
 
-const observer = new MutationObserver(function () {
+const observer = new MutationObserver(async function () {
   const input = getInputDOM();
 
   if (!input) return;
 
-  const selector = createSelector(OPTIONS);
+  const savedTemplates = (await chrome.storage.local.get())["T"];
+
+  const selector = createSelector(savedTemplates);
 
   const parentLabel = input.parentElement;
   parentLabel?.appendChild(selector);

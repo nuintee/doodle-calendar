@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const sendMessage = (value: string) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -16,13 +16,45 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [templates, setTemplates] = useState<string[]>([]);
 
-  const addTemplates = () => {
-    if (!inputValue) return;
+  useEffect(() => {
+    const init = async () => {
+      const savedTemplates = (await chrome.storage.local.get())["T"] || [];
+
+      setTemplates((prev) => [
+        ...prev.filter((template) => !savedTemplates.includes(template)),
+        ...savedTemplates,
+      ]);
+    };
+
+    init();
+  }, []);
+
+  const addTemplates = async () => {
+    if (!inputValue || templates.includes(inputValue)) return;
 
     setTemplates((prev) => [
       ...prev.filter((value) => value !== inputValue),
       inputValue,
     ]);
+
+    const savedTemplates = (await chrome.storage.local.get())["T"] || [];
+
+    chrome.storage.local.set({
+      T: [
+        ...savedTemplates.filter((template: string) => template !== inputValue),
+        inputValue,
+      ],
+    });
+  };
+
+  const clearData = async () => {
+    const answer = confirm("テンプレートを全て削除します");
+
+    if (!answer) return;
+
+    setTemplates([]);
+
+    await chrome.storage.local.clear();
   };
 
   return (
@@ -53,6 +85,13 @@ function App() {
           </button>
         ))}
       </div>
+      <button
+        className="px-4 py-2 enabled:text-red-400 disabled:text-gray-400 disabled:bg-gray-100 enabled:hover:bg-red-500 enabled:hover:text-white rounded-md"
+        onClick={clearData}
+        disabled={!templates.length}
+      >
+        データ削除
+      </button>
     </div>
   );
 }
