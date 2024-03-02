@@ -71,6 +71,7 @@ function App() {
           }
         />
         <ColorPicker
+          defaultColor={inputValue.hex}
           onColorChange={(hex) => setInputValue((prev) => ({ ...prev, hex }))}
         />
         <button
