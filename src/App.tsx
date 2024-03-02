@@ -1,70 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   appendStorageTemplate,
   clearStorageTemplates,
   getStorageTemplates,
 } from "./utils/storage";
 import { sendMessage } from "./utils/message";
-import { CALENDAR_COLORS, ColorHex } from "./constants/colors";
 import { DecorationTemplate } from "./types";
-
-const ColorPicker = ({
-  onColorChange,
-}: {
-  onColorChange: (hex: ColorHex) => void;
-}) => {
-  const [colorState, setColorState] = useState(
-    CALENDAR_COLORS.slice(0).pop()?.hex
-  );
-
-  const noCloseRef = useRef<HTMLDetailsElement | null>(null);
-
-  const handleClick = (hex: ColorHex) => {
-    setColorState(hex);
-    onColorChange(hex);
-  };
-
-  useEffect(() => {
-    const init = () => {
-      document.addEventListener("click", (e) => {
-        const isDescendant = noCloseRef.current?.contains(e.target as Node);
-
-        if (isDescendant || !noCloseRef.current) return;
-
-        noCloseRef.current.open = false;
-      });
-    };
-
-    init();
-  }, []);
-
-  return (
-    <details
-      className="relative p-2 hover:bg-gray-100 rounded-md cursor-pointer group"
-      ref={noCloseRef}
-    >
-      <summary className="marker:hidden list-none">
-        <div
-          className="size-5 rounded-full"
-          style={{ backgroundColor: colorState }}
-        ></div>
-      </summary>
-      <div className="absolute w-[100px] p-2 right-0 grid grid-cols-2 gap-2 bg-white border">
-        {CALENDAR_COLORS.map((color) => (
-          <button
-            className="hover:bg-gray-100 p-2 rounded-md"
-            onClick={() => handleClick(color.hex)}
-          >
-            <div
-              className="size-5 rounded-full"
-              style={{ backgroundColor: color.hex }}
-            ></div>
-          </button>
-        ))}
-      </div>
-    </details>
-  );
-};
+import { ColorPicker } from "./ui/ColorPicker";
+import { ColorButton } from "./ui/ColorButton";
 
 function App() {
   const [inputValue, setInputValue] = useState<DecorationTemplate>({
@@ -139,12 +82,12 @@ function App() {
       <div className="bg-gray-300 w-full h-px"></div>
       <div>
         {templates.map((template) => (
-          <button
-            className="w-full px-4 py-2 text-start hover:bg-gray-200 rounded-md"
+          <ColorButton
             onClick={() => sendMessage(template)}
+            color={template.hex}
           >
             {template.label}
-          </button>
+          </ColorButton>
         ))}
       </div>
       <button
