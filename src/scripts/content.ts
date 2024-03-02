@@ -4,6 +4,7 @@ import {
   getInputDOM,
   getSelector,
 } from "../utils/dom";
+import { MESSAGE_KEY } from "../utils/message";
 import { STORAGE_KEY, getStorageTemplates } from "../utils/storage";
 
 const observer = new MutationObserver(async function () {
@@ -12,6 +13,8 @@ const observer = new MutationObserver(async function () {
   if (!input) return;
 
   const savedTemplates = await getStorageTemplates();
+
+  if (!savedTemplates.length) return;
 
   const selector = createSelector(savedTemplates);
 
@@ -41,7 +44,7 @@ chrome.storage.local.onChanged.addListener((storage) => {
 });
 
 chrome.runtime.onMessage.addListener(function (request) {
-  const value = JSON.parse(request)?.value;
+  const value = JSON.parse(request)?.[MESSAGE_KEY];
 
   const input = getInputDOM();
 
