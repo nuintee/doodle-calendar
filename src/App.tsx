@@ -1,19 +1,47 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   appendStorageTemplate,
   clearStorageTemplates,
   getStorageTemplates,
 } from "./utils/storage";
 import { sendMessage } from "./utils/message";
-import { CALENDAR_COLORS } from "./constants/colors";
+import { CALENDAR_COLORS, ColorHex } from "./constants/colors";
 
-const ColorPicker = () => {
+const ColorPicker = ({
+  onColorChange,
+}: {
+  onColorChange: (hex: ColorHex) => void;
+}) => {
   const [colorState, setColorState] = useState(
     CALENDAR_COLORS.slice(0).pop()?.hex
   );
 
+  const noCloseRef = useRef<HTMLDetailsElement | null>(null);
+
+  const handleClick = (hex: ColorHex) => {
+    setColorState(hex);
+    onColorChange(hex);
+  };
+
+  useEffect(() => {
+    const init = () => {
+      document.addEventListener("click", (e) => {
+        const isDescendant = noCloseRef.current?.contains(e.target as Node);
+
+        if (isDescendant || !noCloseRef.current) return;
+
+        noCloseRef.current.open = false;
+      });
+    };
+
+    init();
+  }, []);
+
   return (
-    <details className="relative p-2 hover:bg-gray-100 rounded-md rounded-md">
+    <details
+      className="relative p-2 hover:bg-gray-100 rounded-md cursor-pointer group"
+      ref={noCloseRef}
+    >
       <summary className="marker:hidden list-none">
         <div
           className="size-5 rounded-full"
@@ -24,7 +52,7 @@ const ColorPicker = () => {
         {CALENDAR_COLORS.map((color) => (
           <button
             className="hover:bg-gray-100 p-2 rounded-md"
-            onClick={() => setColorState(color.hex)}
+            onClick={() => handleClick(color.hex)}
           >
             <div
               className="size-5 rounded-full"
@@ -85,7 +113,7 @@ function App() {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />
-        <ColorPicker />
+        <ColorPicker onColorChange={console.log} />
         <button
           className="px-4 py-2 bg-blue-500 rounded-md text-white shrink-0"
           onClick={addTemplates}
