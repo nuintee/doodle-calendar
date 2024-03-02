@@ -33,6 +33,10 @@ export const createSelector = (options: DecorationTemplate[]) => {
   selector.onchange = (e) => {
     const input = getInputDOM();
     const target = e.target as HTMLSelectElement;
+    const selectedOption = target.selectedOptions[0];
+    const selectedHex = selectedOption.dataset["hex"] as ColorHex;
+
+    setColor(selectedHex);
 
     if (!input || input.value.includes(target.value)) return;
 
