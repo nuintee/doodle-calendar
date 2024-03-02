@@ -36,7 +36,13 @@ function App() {
   }, []);
 
   const addTemplates = async () => {
-    if (!inputValue || templates.includes(inputValue)) return;
+    if (
+      !inputValue.label ||
+      templates.find(
+        (template) => JSON.stringify(template) === JSON.stringify(inputValue)
+      )
+    )
+      return;
 
     setTemplates((prev) => [
       ...prev.filter(
