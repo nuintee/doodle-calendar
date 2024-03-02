@@ -6,6 +6,7 @@ import {
 } from "./utils/storage";
 import { sendMessage } from "./utils/message";
 import { CALENDAR_COLORS, ColorHex } from "./constants/colors";
+import { DecorationTemplate } from "./types";
 
 const ColorPicker = ({
   onColorChange,
@@ -66,15 +67,23 @@ const ColorPicker = ({
 };
 
 function App() {
-  const [inputValue, setInputValue] = useState("");
-  const [templates, setTemplates] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState<DecorationTemplate>({
+    hex: "#039BE5",
+    label: "",
+  });
+  const [templates, setTemplates] = useState<DecorationTemplate[]>([]);
 
   useEffect(() => {
     const init = async () => {
       const savedTemplates = await getStorageTemplates();
 
       setTemplates((prev) => [
-        ...prev.filter((template) => !savedTemplates.includes(template)),
+        ...prev.filter(
+          (template) =>
+            !savedTemplates.find(
+              (saved) => JSON.stringify(saved) === JSON.stringify(template)
+            )
+        ),
         ...savedTemplates,
       ]);
     };
@@ -86,7 +95,9 @@ function App() {
     if (!inputValue || templates.includes(inputValue)) return;
 
     setTemplates((prev) => [
-      ...prev.filter((value) => value !== inputValue),
+      ...prev.filter(
+        (value) => JSON.stringify(value) !== JSON.stringify(inputValue)
+      ),
       inputValue,
     ]);
 
@@ -110,10 +121,14 @@ function App() {
           type="text"
           className="flex-1 block outline-none"
           placeholder="ラベル名を入力して下さい"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={inputValue.label}
+          onChange={(e) =>
+            setInputValue((prev) => ({ ...prev, label: e.target.value }))
+          }
         />
-        <ColorPicker onColorChange={console.log} />
+        <ColorPicker
+          onColorChange={(hex) => setInputValue((prev) => ({ ...prev, hex }))}
+        />
         <button
           className="px-4 py-2 bg-blue-500 rounded-md text-white shrink-0"
           onClick={addTemplates}
@@ -128,7 +143,7 @@ function App() {
             className="w-full px-4 py-2 text-start hover:bg-gray-200 rounded-md"
             onClick={() => sendMessage(template)}
           >
-            {template}
+            {template.label}
           </button>
         ))}
       </div>

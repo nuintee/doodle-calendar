@@ -1,3 +1,4 @@
+import { DecorationTemplate } from "../types";
 import {
   createSelector,
   getInputDOM,
@@ -17,39 +18,44 @@ const observer = new MutationObserver(async function () {
 
   if (!savedTemplates.length) return;
 
-  const selector = createSelector(savedTemplates);
+  const selector = createSelector(
+    savedTemplates.map((template) => template.label)
+  );
 
   const parentLabel = input.parentElement;
   parentLabel?.appendChild(selector);
-
-  // TODO: savedTemplatesから参照
-  setColor("ブドウ");
 });
 
 observer.observe(document.documentElement, { childList: true });
 
 chrome.storage.local.onChanged.addListener((storage) => {
-  const data = storage[STORAGE_KEY];
+  const data = storage[STORAGE_KEY] as { newValue: DecorationTemplate[] };
   const selector = getSelector();
 
   if (!data.newValue) return selector?.remove();
 
   if (!selector) {
-    const newSelector = createSelector(data.newValue);
+    const newSelector = createSelector(
+      data.newValue?.map((value) => value.label)
+    );
     const input = getInputDOM();
     const parentLabel = input?.parentElement;
     return parentLabel?.appendChild(newSelector);
   }
 
-  setSelector(data.newValue);
+  setSelector(data.newValue.map((value) => value.label));
 });
 
 chrome.runtime.onMessage.addListener(function (request) {
-  const value = JSON.parse(request)?.[MESSAGE_KEY];
+  const template = JSON.parse(request)?.[MESSAGE_KEY] as
+    | DecorationTemplate
+    | undefined;
 
   const input = getInputDOM();
 
-  if (!input || !value) return;
+  if (!input || !template) return;
 
-  input.value = value;
+  input.value = template.label;
+
+  setColor(template.hex);
 });
