@@ -18,9 +18,7 @@ const observer = new MutationObserver(async function () {
 
   if (!savedTemplates.length) return;
 
-  const selector = createSelector(
-    savedTemplates.map((template) => template.label)
-  );
+  const selector = createSelector(savedTemplates);
 
   const parentLabel = input.parentElement;
   parentLabel?.appendChild(selector);
@@ -35,15 +33,13 @@ chrome.storage.local.onChanged.addListener((storage) => {
   if (!data.newValue) return selector?.remove();
 
   if (!selector) {
-    const newSelector = createSelector(
-      data.newValue?.map((value) => value.label)
-    );
+    const newSelector = createSelector(data.newValue);
     const input = getInputDOM();
     const parentLabel = input?.parentElement;
     return parentLabel?.appendChild(newSelector);
   }
 
-  setSelector(data.newValue.map((value) => value.label));
+  setSelector(data.newValue);
 });
 
 chrome.runtime.onMessage.addListener(function (request) {

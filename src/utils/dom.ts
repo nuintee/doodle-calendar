@@ -1,4 +1,5 @@
 import { CALENDAR_COLORS, ColorHex, ColorLabel } from "../constants/colors";
+import { DecorationTemplate } from "../types";
 
 const SELECTOR_ID = "template-selector";
 
@@ -19,12 +20,12 @@ export const createOption = (value: string) => {
   return option;
 };
 
-export const createSelector = (options: string[]) => {
+export const createSelector = (options: DecorationTemplate[]) => {
   const selector = document.createElement("select");
   selector.id = SELECTOR_ID;
 
   options.forEach((value) => {
-    selector.appendChild(createOption(value));
+    selector.appendChild(createOption(value.label));
   });
 
   selector.onchange = (e) => {
@@ -39,12 +40,12 @@ export const createSelector = (options: string[]) => {
   return selector;
 };
 
-export const setSelector = (options: string[]) => {
+export const setSelector = (options: DecorationTemplate[]) => {
   const selector = getSelector();
 
   selector?.replaceChildren();
-  options?.forEach((value: string) => {
-    selector?.append(createOption(value));
+  options?.forEach((value) => {
+    selector?.append(createOption(value.label));
   });
 };
 
