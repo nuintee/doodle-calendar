@@ -13,10 +13,12 @@ export const getSelector = () => {
   return document.getElementById(SELECTOR_ID) as HTMLSelectElement | null;
 };
 
-export const createOption = (value: string) => {
+export const createOption = ({ label, hex }: DecorationTemplate) => {
   const option = document.createElement("option");
-  option.value = value;
-  option.innerHTML = value;
+  option.value = label;
+  option.innerHTML = label;
+  option.dataset["hex"] = hex;
+
   return option;
 };
 
@@ -25,7 +27,7 @@ export const createSelector = (options: DecorationTemplate[]) => {
   selector.id = SELECTOR_ID;
 
   options.forEach((value) => {
-    selector.appendChild(createOption(value.label));
+    selector.appendChild(createOption(value));
   });
 
   selector.onchange = (e) => {
@@ -45,7 +47,7 @@ export const setSelector = (options: DecorationTemplate[]) => {
 
   selector?.replaceChildren();
   options?.forEach((value) => {
-    selector?.append(createOption(value.label));
+    selector?.append(createOption(value));
   });
 };
 
