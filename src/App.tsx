@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
-
-const sendMessage = (value: string) => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    chrome.tabs.sendMessage(
-      tabs?.[0]?.id || 1,
-      JSON.stringify({ value }),
-      (responseFromContent) => {
-        console.log({ responseFromContent });
-      }
-    );
-  });
-};
+import {
+  appendStorageTemplate,
+  clearStorageTemplates,
+  getStorageTemplates,
+} from "./utils/storage";
+import { sendMessage } from "./utils/message";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -18,7 +12,7 @@ function App() {
 
   useEffect(() => {
     const init = async () => {
-      const savedTemplates = (await chrome.storage.local.get())["T"] || [];
+      const savedTemplates = await getStorageTemplates();
 
       setTemplates((prev) => [
         ...prev.filter((template) => !savedTemplates.includes(template)),
@@ -37,14 +31,7 @@ function App() {
       inputValue,
     ]);
 
-    const savedTemplates = (await chrome.storage.local.get())["T"] || [];
-
-    chrome.storage.local.set({
-      T: [
-        ...savedTemplates.filter((template: string) => template !== inputValue),
-        inputValue,
-      ],
-    });
+    await appendStorageTemplate(inputValue);
   };
 
   const clearData = async () => {
@@ -54,7 +41,7 @@ function App() {
 
     setTemplates([]);
 
-    await chrome.storage.local.clear();
+    await clearStorageTemplates();
   };
 
   return (

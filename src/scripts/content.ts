@@ -1,3 +1,5 @@
+import { STORAGE_KEY, getStorageTemplates } from "../utils/storage";
+
 const SELECTOR_ID = "__TEMPLATE_SELECTOR";
 
 const getInputDOM = () => {
@@ -31,8 +33,6 @@ const createSelector = (options: string[]) => {
     input.value = `${target.value} ${input.value}`;
   };
 
-  console.log({ selector });
-
   return selector;
 };
 
@@ -41,7 +41,7 @@ const observer = new MutationObserver(async function () {
 
   if (!input) return;
 
-  const savedTemplates = (await chrome.storage.local.get())["T"];
+  const savedTemplates = await getStorageTemplates();
 
   const selector = createSelector(savedTemplates);
 
@@ -51,20 +51,21 @@ const observer = new MutationObserver(async function () {
 
 observer.observe(document.documentElement, { childList: true });
 
-chrome.storage.local.onChanged.addListener(({ T }) => {
+chrome.storage.local.onChanged.addListener((storage) => {
+  const data = storage[STORAGE_KEY];
   const selector = getSelector();
 
-  if (!T.newValue) return selector?.remove();
+  if (!data.newValue) return selector?.remove();
 
   if (!selector) {
-    const newSelector = createSelector(T.newValue);
+    const newSelector = createSelector(data.newValue);
     const input = getInputDOM();
     const parentLabel = input?.parentElement;
     return parentLabel?.appendChild(newSelector);
   }
 
   selector?.replaceChildren();
-  T.newValue?.forEach((value: string) => {
+  data.newValue?.forEach((value: string) => {
     const option = document.createElement("option");
     option.value = value;
     option.innerHTML = value;
@@ -80,5 +81,5 @@ chrome.runtime.onMessage.addListener(function (request) {
 
   if (!input || !value) return;
 
-  (input as HTMLInputElement).value = value;
+  input.value = value;
 });
