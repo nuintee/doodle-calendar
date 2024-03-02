@@ -1,12 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { CALENDAR_COLORS, ColorHex } from "../../constants/colors";
 import { ColorButton } from "../ColorButton";
+import { ColorPickerProps } from "./type";
 
-export const ColorPicker = ({
-  onColorChange,
-}: {
-  onColorChange: (hex: ColorHex) => void;
-}) => {
+export const ColorPicker = ({ onColorChange }: ColorPickerProps) => {
   const [colorState, setColorState] = useState(
     CALENDAR_COLORS.slice(0).pop()?.hex
   );

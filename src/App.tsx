@@ -8,10 +8,11 @@ import { sendMessage } from "./utils/message";
 import { DecorationTemplate } from "./types";
 import { ColorPicker } from "./ui/ColorPicker";
 import { ColorButton } from "./ui/ColorButton";
+import { getCalendarColor } from "./utils/colors";
 
 function App() {
   const [inputValue, setInputValue] = useState<DecorationTemplate>({
-    hex: "#039BE5",
+    hex: getCalendarColor("グラファイト"),
     label: "",
   });
   const [templates, setTemplates] = useState<DecorationTemplate[]>([]);
