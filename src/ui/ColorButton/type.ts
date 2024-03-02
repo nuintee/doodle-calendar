@@ -1,5 +1,6 @@
 export type ColorButtonProps = {
-  onClick: () => void;
+  onClick?: () => void;
   color: string;
   children?: string;
+  asChild?: boolean;
 };

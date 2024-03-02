@@ -38,10 +38,7 @@ export const ColorPicker = ({
       ref={noCloseRef}
     >
       <summary className="marker:hidden list-none">
-        <div
-          className="size-5 rounded-full"
-          style={{ backgroundColor: colorState }}
-        ></div>
+        <ColorButton color={colorState || ""} asChild />
       </summary>
       <div className="absolute w-[100px] p-2 right-0 grid grid-cols-2 gap-2 bg-white border">
         {CALENDAR_COLORS.map((color) => (

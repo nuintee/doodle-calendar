@@ -1,8 +1,16 @@
+import { Fragment } from "react/jsx-runtime";
 import { ColorButtonProps } from "./type";
 
-export const ColorButton = ({ onClick, color, children }: ColorButtonProps) => {
+export const ColorButton = ({
+  onClick,
+  color,
+  children,
+  asChild,
+}: ColorButtonProps) => {
+  const Tag = asChild ? Fragment : "button";
+
   return (
-    <button
+    <Tag
       className="hover:bg-gray-100 p-2 rounded-md flex items-center gap-2 w-full"
       onClick={onClick}
     >
@@ -11,6 +19,6 @@ export const ColorButton = ({ onClick, color, children }: ColorButtonProps) => {
         style={{ backgroundColor: color }}
       ></div>
       {children}
-    </button>
+    </Tag>
   );
 };

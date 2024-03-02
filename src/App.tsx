@@ -85,6 +85,7 @@ function App() {
           <ColorButton
             onClick={() => sendMessage(template)}
             color={template.hex}
+            key={template.hex}
           >
             {template.label}
           </ColorButton>
