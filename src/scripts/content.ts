@@ -1,8 +1,8 @@
 import {
-  createOption,
   createSelector,
   getInputDOM,
   getSelector,
+  setSelector,
 } from "../utils/dom";
 import { MESSAGE_KEY } from "../utils/message";
 import { STORAGE_KEY, getStorageTemplates } from "../utils/storage";
@@ -37,10 +37,7 @@ chrome.storage.local.onChanged.addListener((storage) => {
     return parentLabel?.appendChild(newSelector);
   }
 
-  selector?.replaceChildren();
-  data.newValue?.forEach((value: string) => {
-    selector?.append(createOption(value));
-  });
+  setSelector(data.newValue);
 });
 
 chrome.runtime.onMessage.addListener(function (request) {
