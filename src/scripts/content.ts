@@ -3,6 +3,7 @@ import {
   createDropdown,
   getDropdownDOM,
   getInputDOM,
+  getInputRootParentDOM,
   setColor,
   setDropdown,
 } from "../utils/dom";
@@ -21,16 +22,10 @@ const observer = new MutationObserver(async function () {
 
   if (!savedTemplates.length) return;
 
-  const parentLabel = input.parentElement;
-  const parentDiv = parentLabel?.parentElement;
-
-  if (!parentDiv) return;
-
-  parentDiv.style.paddingBottom = "0px";
-  parentDiv.style.marginBottom = "1rem";
-
   const dropdown = createDropdown(savedTemplates);
-  parentDiv?.appendChild(dropdown);
+  const parentRoot = getInputRootParentDOM();
+
+  parentRoot?.appendChild(dropdown);
 });
 
 observer.observe(document.documentElement, { childList: true });
@@ -39,16 +34,13 @@ chrome.storage.local.onChanged.addListener((storage) => {
   const data = storage[STORAGE_KEY] as { newValue: DecorationTemplate[] };
   const dropdown = getDropdownDOM();
 
-  console.log({ dropdown, n: data.newValue });
-
   if (!data.newValue) return dropdown?.remove();
 
   if (!dropdown) {
     const newDropdown = createDropdown(data.newValue);
-    const input = getInputDOM();
-    const parentLabel = input?.parentElement;
-    const parentDiv = parentLabel?.parentElement;
-    return parentDiv?.appendChild(newDropdown);
+
+    const parentRoot = getInputRootParentDOM();
+    return parentRoot?.appendChild(newDropdown);
   }
 
   setDropdown(data.newValue);

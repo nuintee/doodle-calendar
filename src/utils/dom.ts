@@ -1,7 +1,6 @@
 import { CALENDAR_COLORS, ColorHex, ColorLabel } from "../constants/colors";
 import { DecorationTemplate } from "../types";
 
-const SELECTOR_ID = "template-selector";
 const DROPDOWN_ID = "template-dropdown";
 
 export const getInputDOM = () => {
@@ -10,9 +9,18 @@ export const getInputDOM = () => {
   ) as HTMLInputElement | null;
 };
 
-export const getSelector = () => {
-  return document.getElementById(SELECTOR_ID) as HTMLSelectElement | null;
+export const getInputRootParentDOM = () => {
+  const rootParent = getInputDOM()?.parentElement
+    ?.parentElement as HTMLDivElement | null;
+
+  if (rootParent) {
+    rootParent.style.paddingBottom = "0px";
+    rootParent.style.marginBottom = "1rem";
+  }
+
+  return rootParent;
 };
+
 export const createDropdownItem = ({ label, hex }: DecorationTemplate) => {
   const input = getInputDOM();
   const button = document.createElement("button");
@@ -94,9 +102,9 @@ export const getDropdownDOM = () => {
 export const setDropdown = (options: DecorationTemplate[]) => {
   const dropdown = getDropdownDOM();
 
-  dropdown?.replaceChildren();
+  dropdown?.querySelector("& > div")?.replaceChildren();
   options?.forEach((value) => {
-    dropdown?.append(createDropdownItem(value));
+    dropdown?.querySelector("& > div")?.append(createDropdownItem(value));
   });
 };
 
