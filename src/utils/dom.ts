@@ -61,10 +61,18 @@ export const createDropdown = (options: DecorationTemplate[]) => {
   details.style.padding = "0.5rem 0px";
 
   const summary = document.createElement("summary");
-  summary.style.cursor = "pointer";
   summary.innerText = "カスタムテンプレート 💅";
+  summary.style.cursor = "pointer";
   summary.style.padding = "0.5rem";
   summary.style.borderRadius = "0.25rem";
+  summary.style.position = "relative";
+
+  // 枠外クリック対応
+  document.body.addEventListener("click", (e) => {
+    if (details.contains(e.target as Node)) return;
+
+    details.removeAttribute("open");
+  });
 
   // ホバー対応
   summary.onmouseenter = () => {
