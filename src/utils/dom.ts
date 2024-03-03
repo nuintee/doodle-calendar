@@ -58,11 +58,22 @@ export const createDropdown = (options: DecorationTemplate[]) => {
   details.style.position = "relative";
   details.style.width = "200px";
   details.style.maxWidth = "100%";
-  details.style.padding = "0.5rem 0.25rem 0.25rem 0rem";
+  details.style.padding = "0.5rem 0px";
 
   const summary = document.createElement("summary");
   summary.style.cursor = "pointer";
-  summary.innerText = "テンプレート";
+  summary.innerText = "カスタムテンプレート 💅";
+  summary.style.padding = "0.5rem";
+  summary.style.borderRadius = "0.25rem";
+
+  // ホバー対応
+  summary.onmouseenter = () => {
+    summary.style.backgroundColor = "#f3f4f6";
+  };
+
+  summary.onmouseleave = () => {
+    summary.style.backgroundColor = "#FFF";
+  };
 
   const div = document.createElement("div");
   div.style.width = "100%";
