@@ -10,15 +10,7 @@ export const getInputDOM = () => {
 };
 
 export const getInputRootParentDOM = () => {
-  const rootParent = getInputDOM()?.parentElement
-    ?.parentElement as HTMLDivElement | null;
-
-  if (rootParent) {
-    rootParent.style.paddingBottom = "0px";
-    rootParent.style.marginBottom = "1rem";
-  }
-
-  return rootParent;
+  return getInputDOM()?.parentElement?.parentElement as HTMLDivElement | null;
 };
 
 export const createDropdownItem = ({ label, hex }: DecorationTemplate) => {
@@ -66,6 +58,7 @@ export const createDropdown = (options: DecorationTemplate[]) => {
   details.style.position = "relative";
   details.style.width = "200px";
   details.style.maxWidth = "100%";
+  details.style.padding = "0.5rem 0.25rem 0.25rem 0rem";
 
   const summary = document.createElement("summary");
   summary.style.cursor = "pointer";

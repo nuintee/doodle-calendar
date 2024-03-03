@@ -23,9 +23,14 @@ const observer = new MutationObserver(async function () {
   if (!savedTemplates.length) return;
 
   const dropdown = createDropdown(savedTemplates);
-  const parentRoot = getInputRootParentDOM();
+  const rootParent = getInputRootParentDOM();
 
-  parentRoot?.appendChild(dropdown);
+  if (!rootParent) return;
+
+  rootParent.style.height = "100%";
+  rootParent.style.padding = "1rem 0px";
+
+  rootParent?.appendChild(dropdown);
 });
 
 observer.observe(document.documentElement, { childList: true });

@@ -84,7 +84,7 @@ function App() {
           className="px-4 py-2 bg-blue-500 rounded-md text-white shrink-0"
           onClick={addTemplates}
         >
-          保存
+          追加
         </button>
       </div>
       <div className="bg-gray-300 w-full h-px"></div>
