@@ -23,17 +23,23 @@ const observer = new MutationObserver(async function () {
 
   const details = document.createElement("details");
   details.style.position = "relative";
+  details.style.width = "200px";
+  details.style.maxWidth = "100%";
 
   const summary = document.createElement("summary");
+  summary.style.cursor = "pointer";
   summary.innerText = "テンプレート";
 
   const div = document.createElement("div");
+  div.style.width = "100%";
   div.style.backgroundColor = "#FFF";
-  div.style.border = "1px solid gray";
+  div.style.border = "none";
   div.style.position = "absolute";
   div.style.isolation = "isolate";
   div.style.zIndex = "1";
   div.style.listStyle = "none";
+  div.style.borderRadius = "10px";
+  div.style.boxShadow = "0px 0px 15px -5px #949494";
 
   savedTemplates.forEach((template) => {
     const button = document.createElement("button");
@@ -42,8 +48,8 @@ const observer = new MutationObserver(async function () {
       <span>${template.label}</span>
     `;
     button.dataset["hex"] = template.hex;
-    button.style.padding = "0.25rem 0.5rem";
-    button.style.background = "ghostwhite";
+    button.style.padding = "0.5rem";
+    button.style.background = "#FFF";
     button.style.width = "100%";
     button.style.textAlign = "start";
     button.style.display = "flex";
@@ -51,6 +57,16 @@ const observer = new MutationObserver(async function () {
     button.style.cursor = "pointer";
     button.style.borderRadius = "0.25rem";
     button.style.border = "none";
+
+    // ホバー対応
+    button.onmouseenter = () => {
+      button.style.background = "#f3f4f6";
+    };
+
+    button.onmouseleave = () => {
+      button.style.background = "#FFF";
+    };
+
     button.onclick = () => {
       setColor(template.hex);
 
