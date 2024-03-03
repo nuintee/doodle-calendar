@@ -52,10 +52,10 @@ const observer = new MutationObserver(async function () {
     button.style.borderRadius = "0.25rem";
     button.style.border = "none";
     button.onclick = () => {
-      // labelの変更が通知されない
       setColor(template.hex);
 
       input.value = template.label;
+      input.focus(); // NOTE: これがないと値更新が反映されない
     };
 
     div.appendChild(button);
@@ -66,13 +66,12 @@ const observer = new MutationObserver(async function () {
 
   const parentLabel = input.parentElement;
   const parentDiv = parentLabel?.parentElement;
-  parentDiv?.appendChild(details);
 
-  // parentLabel?.appendChild(app);
-  // ReactDOM.render(
-  //   <ColorButton color="#039BE5" />,
-  //   document.getElementById(app.id)
-  // );
+  if (!parentDiv) return;
+
+  parentDiv.style.paddingBottom = "0px";
+  parentDiv.style.marginBottom = "1rem";
+  parentDiv?.appendChild(details);
 });
 
 observer.observe(document.documentElement, { childList: true });
