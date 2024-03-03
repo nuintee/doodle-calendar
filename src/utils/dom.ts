@@ -2,6 +2,7 @@ import { CALENDAR_COLORS, ColorHex, ColorLabel } from "../constants/colors";
 import { DecorationTemplate } from "../types";
 
 const SELECTOR_ID = "template-selector";
+const DROPDOWN_ID = "template-dropdown";
 
 export const getInputDOM = () => {
   return document.querySelector(
@@ -12,11 +13,48 @@ export const getInputDOM = () => {
 export const getSelector = () => {
   return document.getElementById(SELECTOR_ID) as HTMLSelectElement | null;
 };
+export const createDropdownItem = ({ label, hex }: DecorationTemplate) => {
+  const input = getInputDOM();
+  const button = document.createElement("button");
+  button.innerHTML = `
+      <div style = 'height: 1rem; width: 1rem; background: ${hex}; border-radius: 100%'></div>
+      <span>${label}</span>
+    `;
+  button.dataset["hex"] = hex;
+  button.style.padding = "0.5rem";
+  button.style.background = "#FFF";
+  button.style.width = "100%";
+  button.style.textAlign = "start";
+  button.style.display = "flex";
+  button.style.gap = "0.25rem";
+  button.style.cursor = "pointer";
+  button.style.borderRadius = "0.25rem";
+  button.style.border = "none";
+
+  // ホバー対応
+  button.onmouseenter = () => {
+    button.style.background = "#f3f4f6";
+  };
+
+  button.onmouseleave = () => {
+    button.style.background = "#FFF";
+  };
+
+  button.onclick = () => {
+    setColor(hex);
+
+    if (!input) return;
+
+    input.value = label;
+    input.focus(); // NOTE: これがないと値更新が反映されない
+  };
+
+  return button;
+};
 
 export const createDropdown = (options: DecorationTemplate[]) => {
-  const input = getInputDOM();
-
   const details = document.createElement("details");
+  details.id = DROPDOWN_ID;
   details.style.position = "relative";
   details.style.width = "200px";
   details.style.maxWidth = "100%";
@@ -37,39 +75,7 @@ export const createDropdown = (options: DecorationTemplate[]) => {
   div.style.boxShadow = "0px 0px 15px -5px #949494";
 
   options.forEach((template) => {
-    const button = document.createElement("button");
-    button.innerHTML = `
-      <div style = 'height: 1rem; width: 1rem; background: ${template.hex}; border-radius: 100%'></div>
-      <span>${template.label}</span>
-    `;
-    button.dataset["hex"] = template.hex;
-    button.style.padding = "0.5rem";
-    button.style.background = "#FFF";
-    button.style.width = "100%";
-    button.style.textAlign = "start";
-    button.style.display = "flex";
-    button.style.gap = "0.25rem";
-    button.style.cursor = "pointer";
-    button.style.borderRadius = "0.25rem";
-    button.style.border = "none";
-
-    // ホバー対応
-    button.onmouseenter = () => {
-      button.style.background = "#f3f4f6";
-    };
-
-    button.onmouseleave = () => {
-      button.style.background = "#FFF";
-    };
-
-    button.onclick = () => {
-      setColor(template.hex);
-
-      if (!input) return;
-
-      input.value = template.label;
-      input.focus(); // NOTE: これがないと値更新が反映されない
-    };
+    const button = createDropdownItem(template);
 
     div.appendChild(button);
   });
@@ -79,45 +85,18 @@ export const createDropdown = (options: DecorationTemplate[]) => {
   return details;
 };
 
-export const createOption = ({ label, hex }: DecorationTemplate) => {
-  const option = document.createElement("option");
-  option.value = label;
-  option.innerHTML = label;
-  option.dataset["hex"] = hex;
-
-  return option;
+export const getDropdownDOM = () => {
+  return document.querySelector(
+    `details#${DROPDOWN_ID}`
+  ) as HTMLDetailsElement | null;
 };
 
-export const createSelector = (options: DecorationTemplate[]) => {
-  const selector = document.createElement("select");
-  selector.id = SELECTOR_ID;
+export const setDropdown = (options: DecorationTemplate[]) => {
+  const dropdown = getDropdownDOM();
 
-  options.forEach((value) => {
-    selector.appendChild(createOption(value));
-  });
-
-  selector.onchange = (e) => {
-    const input = getInputDOM();
-    const target = e.target as HTMLSelectElement;
-    const selectedOption = target.selectedOptions[0];
-    const selectedHex = selectedOption.dataset["hex"] as ColorHex;
-
-    setColor(selectedHex);
-
-    if (!input || input.value.includes(target.value)) return;
-
-    input.value = `${target.value} ${input.value}`;
-  };
-
-  return selector;
-};
-
-export const setSelector = (options: DecorationTemplate[]) => {
-  const selector = getSelector();
-
-  selector?.replaceChildren();
+  dropdown?.replaceChildren();
   options?.forEach((value) => {
-    selector?.append(createOption(value));
+    dropdown?.append(createDropdownItem(value));
   });
 };
 

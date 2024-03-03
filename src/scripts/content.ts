@@ -1,11 +1,10 @@
 import { DecorationTemplate } from "../types";
 import {
   createDropdown,
-  createSelector,
+  getDropdownDOM,
   getInputDOM,
-  getSelector,
   setColor,
-  setSelector,
+  setDropdown,
 } from "../utils/dom";
 import { MESSAGE_KEY } from "../utils/message";
 import { STORAGE_KEY, getStorageTemplates } from "../utils/storage";
@@ -38,18 +37,21 @@ observer.observe(document.documentElement, { childList: true });
 
 chrome.storage.local.onChanged.addListener((storage) => {
   const data = storage[STORAGE_KEY] as { newValue: DecorationTemplate[] };
-  const selector = getSelector();
+  const dropdown = getDropdownDOM();
 
-  if (!data.newValue) return selector?.remove();
+  console.log({ dropdown, n: data.newValue });
 
-  if (!selector) {
-    const newSelector = createSelector(data.newValue);
+  if (!data.newValue) return dropdown?.remove();
+
+  if (!dropdown) {
+    const newDropdown = createDropdown(data.newValue);
     const input = getInputDOM();
     const parentLabel = input?.parentElement;
-    return parentLabel?.appendChild(newSelector);
+    const parentDiv = parentLabel?.parentElement;
+    return parentDiv?.appendChild(newDropdown);
   }
 
-  setSelector(data.newValue);
+  setDropdown(data.newValue);
 });
 
 chrome.runtime.onMessage.addListener(function (request) {
