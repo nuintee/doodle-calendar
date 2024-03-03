@@ -14,7 +14,7 @@ const manifest = defineManifest({
   },
   content_scripts: [
     {
-      js: ["src/scripts/content.tsx"],
+      js: ["src/scripts/content.ts"],
       matches: ["https://calendar.google.com/calendar/*"],
     },
   ],
