@@ -1,4 +1,5 @@
 import { DecorationTemplate } from "../types";
+import { ColorButton } from "../ui/ColorButton";
 import {
   createSelector,
   getInputDOM,
@@ -8,6 +9,10 @@ import {
 } from "../utils/dom";
 import { MESSAGE_KEY } from "../utils/message";
 import { STORAGE_KEY, getStorageTemplates } from "../utils/storage";
+import ReactDOM from "react-dom";
+
+const app = document.createElement("div");
+app.id = "selector-app";
 
 const observer = new MutationObserver(async function () {
   const input = getInputDOM();
@@ -18,10 +23,16 @@ const observer = new MutationObserver(async function () {
 
   if (!savedTemplates.length) return;
 
-  const selector = createSelector(savedTemplates);
+  // NOTE: React注入がうまくいかない場合に復元
+  // const selector = createSelector(savedTemplates);
+  // parentLabel?.appendChild(selector);
 
   const parentLabel = input.parentElement;
-  parentLabel?.appendChild(selector);
+  parentLabel?.appendChild(app);
+  ReactDOM.render(
+    <ColorButton color="#039BE5" onClick={() => {}} />,
+    document.getElementById(app.id)
+  );
 });
 
 observer.observe(document.documentElement, { childList: true });
