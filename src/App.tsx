@@ -72,6 +72,7 @@ function App() {
           className="flex-1 block outline-none"
           placeholder="ラベル名を入力して下さい"
           value={inputValue.label}
+          onKeyDown={(e) => e.key === "Enter" && addTemplates()}
           onChange={(e) =>
             setInputValue((prev) => ({ ...prev, label: e.target.value }))
           }
@@ -80,15 +81,17 @@ function App() {
           defaultColor={inputValue.hex}
           onColorChange={(hex) => setInputValue((prev) => ({ ...prev, hex }))}
         />
-        <button
-          className="px-4 py-2 bg-blue-500 rounded-md text-white shrink-0"
-          onClick={addTemplates}
-        >
-          追加
-        </button>
+        {Boolean(templates.length) && (
+          <button
+            className="px-4 py-2 enabled:hover:bg-red-100 rounded-md text-white shrink-0"
+            onClick={clearData}
+          >
+            🗑️
+          </button>
+        )}
       </div>
       <div className="bg-gray-300 w-full h-px"></div>
-      <div>
+      <div className="flex flex-col gap-y-2">
         {templates.map((template) => (
           <ColorButton
             onClick={() => sendMessage(template)}
@@ -99,13 +102,6 @@ function App() {
           </ColorButton>
         ))}
       </div>
-      <button
-        className="px-4 py-2 enabled:text-red-400 disabled:text-gray-400 disabled:bg-gray-100 enabled:hover:bg-red-500 enabled:hover:text-white rounded-md"
-        onClick={clearData}
-        disabled={!templates.length}
-      >
-        データ削除
-      </button>
     </div>
   );
 }

@@ -11,7 +11,7 @@ export const ColorButton = ({
 
   return (
     <Tag
-      className="hover:bg-gray-100 p-2 rounded-md flex items-center gap-2 w-full"
+      className="hover:bg-gray-100 active:bg-gray-200 border border-gray-100 p-2 rounded-md flex items-center gap-2 w-full"
       onClick={onClick}
     >
       <div
