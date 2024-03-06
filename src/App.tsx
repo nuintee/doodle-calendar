@@ -59,7 +59,7 @@ function App() {
   };
 
   const clearData = async () => {
-    const answer = confirm("テンプレートを全て削除します");
+    const answer = confirm("予定テンプレートを全て削除します");
 
     if (!answer) return;
 
@@ -75,7 +75,7 @@ function App() {
           <input
             type="text"
             className="flex-1 text-base caret-gray-500 block outline-none"
-            placeholder="テンプレートを作成"
+            placeholder="予定テンプレート名を入力"
             value={inputValue.label}
             onKeyDown={(e) => e.key === "Enter" && addTemplates()}
             onChange={(e) =>
@@ -117,7 +117,9 @@ function App() {
           </div>
         </details>
       </div>
-      <span className="text-xs text-gray-500 mt-2">保存済みテンプレート</span>
+      <span className="text-xs text-gray-500 mt-2">
+        保存済みの予定テンプレート
+      </span>
       <div className="bg-gray-300 w-full h-px"></div>
       <div className="flex flex-col gap-y-2 overflow-auto">
         {templates.map((template) => (
