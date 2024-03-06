@@ -10,11 +10,7 @@ import { ColorPicker } from "./ui/ColorPicker";
 import { ColorButton } from "./ui/ColorButton";
 import { getCalendarColor } from "./utils/colors";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
-import {
-  InformationCircleIcon,
-  PlusIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
+import { InformationCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 import { version } from "../package.json";
 
@@ -73,23 +69,24 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col gap-y-2 p-2 w-[350px] h-[400px] overflow-hidden">
-      <div className="flex items-center gap-x-1">
-        <PlusIcon height={16} width={16} className="text-gray-500" />
-        <input
-          type="text"
-          className="flex-1 text-base caret-gray-500 block outline-none"
-          placeholder="ラベル名を入力して下さい"
-          value={inputValue.label}
-          onKeyDown={(e) => e.key === "Enter" && addTemplates()}
-          onChange={(e) =>
-            setInputValue((prev) => ({ ...prev, label: e.target.value }))
-          }
-        />
-        <ColorPicker
-          defaultColor={inputValue.hex}
-          onColorChange={(hex) => setInputValue((prev) => ({ ...prev, hex }))}
-        />
+    <div className="flex flex-col gap-y-2 p-2 w-[400px] h-[400px] overflow-hidden">
+      <div className="flex items-center gap-x-2">
+        <div className="flex items-center flex-1 gap-x-1 border rounded-md border-gray-300 px-2 py-1">
+          <input
+            type="text"
+            className="flex-1 text-base caret-gray-500 block outline-none"
+            placeholder="テンプレートを作成"
+            value={inputValue.label}
+            onKeyDown={(e) => e.key === "Enter" && addTemplates()}
+            onChange={(e) =>
+              setInputValue((prev) => ({ ...prev, label: e.target.value }))
+            }
+          />
+          <ColorPicker
+            defaultColor={inputValue.hex}
+            onColorChange={(hex) => setInputValue((prev) => ({ ...prev, hex }))}
+          />
+        </div>
         <details className="p-1 relative">
           <summary className="marker:hidden list-none cursor-pointer">
             <EllipsisVerticalIcon
@@ -120,7 +117,7 @@ function App() {
           </div>
         </details>
       </div>
-      <span className="text-xs text-gray-500">保存済みテンプレート</span>
+      <span className="text-xs text-gray-500 mt-2">保存済みテンプレート</span>
       <div className="bg-gray-300 w-full h-px"></div>
       <div className="flex flex-col gap-y-2 overflow-auto">
         {templates.map((template) => (
