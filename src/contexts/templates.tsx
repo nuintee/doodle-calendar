@@ -61,6 +61,10 @@ export const TemplatesProvider: FC<{ children: ReactNode }> = ({
   };
 
   const removeTemplate = async (inputValue: DecorationTemplate) => {
+    const answer = confirm(`${inputValue.label}を削除します`);
+
+    if (!answer) return;
+
     setTemplates((prev) =>
       prev.filter(
         (template) => JSON.stringify(template) !== JSON.stringify(inputValue)
