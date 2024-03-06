@@ -5,11 +5,6 @@ export const sendMessage = async <T extends CustomMessageEventEnums>(
   template: T extends 'CLEAR' ? null : DecorationTemplate
 ) => {
   chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
-    chrome.tabs.sendMessage(
-      tabs?.[0]?.id || 1,
-      { event, payload: template },
-      {},
-      (response) => console.log({ response })
-    );
+    chrome.tabs.sendMessage(tabs?.[0]?.id || 1, { event, payload: template });
   });
 };

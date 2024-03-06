@@ -6,11 +6,15 @@ import { sendMessage } from '../utils/message';
 export const TemplatesContext = createContext<{
   templates: DecorationTemplate[];
   addTemplates: (inputValue: DecorationTemplate) => void;
+  removeTemplate: (inputValue: DecorationTemplate) => void;
+  applyTemplate: (inputValue: DecorationTemplate) => void;
   clearTemplates: () => void;
 }>({
   templates: [],
   addTemplates: () => {},
-  clearTemplates: () => {}
+  clearTemplates: () => {},
+  removeTemplate: () => {},
+  applyTemplate: () => {}
 });
 
 export const TemplatesProvider: FC<{ children: ReactNode }> = ({
@@ -56,6 +60,15 @@ export const TemplatesProvider: FC<{ children: ReactNode }> = ({
     sendMessage('ADD', inputValue);
   };
 
+  const removeTemplate = async (inputValue: DecorationTemplate) => {
+    setTemplates((prev) =>
+      prev.filter(
+        (template) => JSON.stringify(template) !== JSON.stringify(inputValue)
+      )
+    );
+    sendMessage('DELETE', inputValue);
+  };
+
   const clearTemplates = async () => {
     const answer = confirm('予定テンプレートを全て削除します');
 
@@ -66,9 +79,19 @@ export const TemplatesProvider: FC<{ children: ReactNode }> = ({
     sendMessage('CLEAR', null);
   };
 
+  const applyTemplate = (inputValue: DecorationTemplate) => {
+    sendMessage('APPLY', inputValue);
+  };
+
   return (
     <TemplatesContext.Provider
-      value={{ templates, addTemplates, clearTemplates }}
+      value={{
+        templates,
+        addTemplates,
+        clearTemplates,
+        removeTemplate,
+        applyTemplate
+      }}
     >
       {children}
     </TemplatesContext.Provider>

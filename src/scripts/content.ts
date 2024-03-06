@@ -11,7 +11,8 @@ import {
   STORAGE_KEY,
   appendStorageTemplate,
   clearStorageTemplates,
-  getStorageTemplates
+  getStorageTemplates,
+  removeStorageTemplate
 } from '../utils/storage';
 
 const app = document.createElement('div');
@@ -71,7 +72,12 @@ chrome.runtime.onMessage.addListener(async function (
   } else if (request.event === 'ADD') {
     await appendStorageTemplate(request.payload);
   } else if (request.event === 'DELETE') {
-    //
+    const template = request.payload;
+    const removedTemplates = await removeStorageTemplate(template);
+
+    if (removedTemplates.length) return;
+
+    getDropdownDOM()?.remove();
   } else if (request.event === 'CLEAR') {
     await clearStorageTemplates();
   }

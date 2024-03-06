@@ -10,15 +10,36 @@ export const getStorageTemplates = async (): Promise<DecorationTemplate[]> => {
 
 export const appendStorageTemplate = async (newValue: DecorationTemplate) => {
   const savedTemplates = await getStorageTemplates();
+  const newTemplates = [
+    ...savedTemplates.filter(
+      (template) => JSON.stringify(template) !== JSON.stringify(newValue)
+    ),
+    newValue
+  ];
 
   await chrome.storage.local.set({
-    [STORAGE_KEY]: [
-      ...savedTemplates.filter(
-        (template) => JSON.stringify(template) !== JSON.stringify(newValue)
-      ),
-      newValue
-    ]
+    [STORAGE_KEY]: newTemplates
   });
+
+  return newTemplates;
+};
+
+export const removeStorageTemplate = async (
+  toBeRemovedTemplate: DecorationTemplate
+) => {
+  const savedTemplates = await getStorageTemplates();
+  const newTemplates = [
+    ...savedTemplates.filter(
+      (template) =>
+        JSON.stringify(template) !== JSON.stringify(toBeRemovedTemplate)
+    )
+  ];
+
+  await chrome.storage.local.set({
+    [STORAGE_KEY]: newTemplates
+  });
+
+  return newTemplates;
 };
 
 export const clearStorageTemplates = async () => {

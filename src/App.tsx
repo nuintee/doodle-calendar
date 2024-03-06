@@ -1,4 +1,3 @@
-import { sendMessage } from './utils/message';
 import { ColorPicker } from './ui/ColorPicker';
 
 import { TemplateButton } from './ui/TemplateButton';
@@ -7,7 +6,8 @@ import { useTemplates } from './hooks/useTemplates';
 import { useTemplateForm } from './hooks/useTemplateForm';
 
 function App() {
-  const { templates, addTemplates } = useTemplates();
+  const { templates, addTemplates, removeTemplate, applyTemplate } =
+    useTemplates();
 
   const { handleKeyDown, handleChange, handleColorChange, inputValue } =
     useTemplateForm({
@@ -42,8 +42,8 @@ function App() {
           <TemplateButton
             color={template.hex}
             key={template.hex}
-            onDelete={() => alert('del')}
-            onApply={() => sendMessage('APPLY', template)}
+            onDelete={() => removeTemplate(template)}
+            onApply={() => applyTemplate(template)}
           >
             {template.label}
           </TemplateButton>
