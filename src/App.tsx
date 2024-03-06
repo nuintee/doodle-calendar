@@ -7,12 +7,12 @@ import {
 import { sendMessage } from "./utils/message";
 import { DecorationTemplate } from "./types";
 import { ColorPicker } from "./ui/ColorPicker";
-import { ColorButton } from "./ui/ColorButton";
 import { getCalendarColor } from "./utils/colors";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import { InformationCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 import { version } from "../package.json";
+import { TemplatesButton } from "./ui/TemplateButton";
 
 function App() {
   const [inputValue, setInputValue] = useState<DecorationTemplate>({
@@ -123,13 +123,14 @@ function App() {
       <div className="bg-gray-300 w-full h-px"></div>
       <div className="flex flex-col gap-y-2 overflow-auto">
         {templates.map((template) => (
-          <ColorButton
-            onClick={() => sendMessage(template)}
+          <TemplatesButton
             color={template.hex}
             key={template.hex}
+            onDelete={() => {}}
+            onApply={() => sendMessage(template)}
           >
             {template.label}
-          </ColorButton>
+          </TemplatesButton>
         ))}
       </div>
     </div>
