@@ -1,17 +1,17 @@
-import { DecorationTemplate } from "../types";
+import { DecorationTemplate } from '../types';
 import {
   createDropdown,
   getDropdownDOM,
   getInputDOM,
   getInputRootParentDOM,
   setColor,
-  setDropdown,
-} from "../utils/dom";
-import { MESSAGE_KEY } from "../utils/message";
-import { STORAGE_KEY, getStorageTemplates } from "../utils/storage";
+  setDropdown
+} from '../utils/dom';
+import { MESSAGE_KEY } from '../utils/message';
+import { STORAGE_KEY, getStorageTemplates } from '../utils/storage';
 
-const app = document.createElement("div");
-app.id = "selector-app";
+const app = document.createElement('div');
+app.id = 'selector-app';
 
 const observer = new MutationObserver(async function () {
   const input = getInputDOM();
@@ -27,8 +27,8 @@ const observer = new MutationObserver(async function () {
 
   if (!rootParent) return;
 
-  rootParent.style.height = "100%";
-  rootParent.style.padding = "1rem 0px";
+  rootParent.style.height = '100%';
+  rootParent.style.padding = '1rem 0px';
 
   rootParent?.appendChild(dropdown);
 });

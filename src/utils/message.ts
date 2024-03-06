@@ -1,6 +1,6 @@
-import { DecorationTemplate } from "../types";
+import { DecorationTemplate } from '../types';
 
-export const MESSAGE_KEY = "templateValue";
+export const MESSAGE_KEY = 'templateValue';
 
 export const sendMessage = (template: DecorationTemplate) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {

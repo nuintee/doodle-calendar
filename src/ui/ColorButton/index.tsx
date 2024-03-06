@@ -1,13 +1,13 @@
-import { Fragment } from "react/jsx-runtime";
-import { ColorButtonProps } from "./type";
+import { Fragment } from 'react/jsx-runtime';
+import { ColorButtonProps } from './type';
 
 export const ColorButton = ({
   onClick,
   color,
   children,
-  asChild,
+  asChild
 }: ColorButtonProps) => {
-  const Tag = asChild ? Fragment : "button";
+  const Tag = asChild ? Fragment : 'button';
 
   return (
     <Tag

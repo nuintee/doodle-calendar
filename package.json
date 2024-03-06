@@ -9,6 +9,7 @@
     "rename:popup": "sed 's/root/popup/' build/index.html > build/popup.html",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write \"**/*.+(ts|tsx)\"",
     "preview": "vite preview"
   },
   "dependencies": {
