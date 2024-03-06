@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   appendStorageTemplate,
   clearStorageTemplates,
-  getStorageTemplates,
-} from "./utils/storage";
-import { sendMessage } from "./utils/message";
-import { DecorationTemplate } from "./types";
-import { ColorPicker } from "./ui/ColorPicker";
-import { getCalendarColor } from "./utils/colors";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
-import { InformationCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
+  getStorageTemplates
+} from './utils/storage';
+import { sendMessage } from './utils/message';
+import { DecorationTemplate } from './types';
+import { ColorPicker } from './ui/ColorPicker';
+import { getCalendarColor } from './utils/colors';
+import { EllipsisVerticalIcon } from '@heroicons/react/24/solid';
+import { InformationCircleIcon, TrashIcon } from '@heroicons/react/24/outline';
 
-import { version } from "../package.json";
-import { TemplateButton } from "./ui/TemplateButton";
+import { version } from '../package.json';
+import { TemplateButton } from './ui/TemplateButton';
 
 function App() {
   const [inputValue, setInputValue] = useState<DecorationTemplate>({
-    hex: getCalendarColor("グラファイト"),
-    label: "",
+    hex: getCalendarColor('グラファイト'),
+    label: ''
   });
   const [templates, setTemplates] = useState<DecorationTemplate[]>([]);
 
@@ -32,7 +32,7 @@ function App() {
               (saved) => JSON.stringify(saved) === JSON.stringify(template)
             )
         ),
-        ...savedTemplates,
+        ...savedTemplates
       ]);
     };
 
@@ -52,14 +52,14 @@ function App() {
       ...prev.filter(
         (value) => JSON.stringify(value) !== JSON.stringify(inputValue)
       ),
-      inputValue,
+      inputValue
     ]);
 
     await appendStorageTemplate(inputValue);
   };
 
   const clearData = async () => {
-    const answer = confirm("予定テンプレートを全て削除します");
+    const answer = confirm('予定テンプレートを全て削除します');
 
     if (!answer) return;
 
@@ -77,7 +77,7 @@ function App() {
             className="block flex-1 text-base caret-gray-500 outline-none"
             placeholder="予定テンプレート名を入力"
             value={inputValue.label}
-            onKeyDown={(e) => e.key === "Enter" && addTemplates()}
+            onKeyDown={(e) => e.key === 'Enter' && addTemplates()}
             onChange={(e) =>
               setInputValue((prev) => ({ ...prev, label: e.target.value }))
             }
@@ -126,7 +126,7 @@ function App() {
           <TemplateButton
             color={template.hex}
             key={template.hex}
-            onDelete={() => alert("del")}
+            onDelete={() => alert('del')}
             onApply={() => sendMessage(template)}
           >
             {template.label}
