@@ -41,10 +41,11 @@ export const ColorPicker = ({
         <ColorButton color={colorState || ''} asChild />
       </summary>
       <div className="absolute right-0 grid w-[100px] grid-cols-2 gap-2 rounded-md border border-gray-100 bg-white p-2 shadow-sm">
-        {CALENDAR_COLORS.map((color) => (
+        {CALENDAR_COLORS.map(({ hex, label }) => (
           <ColorButton
-            color={color.hex}
-            onClick={() => handleClick(color.hex)}
+            color={hex}
+            onClick={() => handleClick(hex)}
+            key={`${label}-${hex}`}
           />
         ))}
       </div>

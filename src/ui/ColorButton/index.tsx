@@ -11,8 +11,11 @@ export const ColorButton = ({
 
   return (
     <Tag
-      className="flex w-full items-center gap-2 rounded-md border border-gray-100 p-2 hover:bg-gray-100 active:bg-gray-200"
-      onClick={onClick}
+      {...(!asChild && {
+        className:
+          'flex w-full items-center gap-2 rounded-md border border-gray-100 p-2 hover:bg-gray-100 active:bg-gray-200',
+        onClick
+      })}
     >
       <div
         className="aspect-square size-5 rounded-full"
