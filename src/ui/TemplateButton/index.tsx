@@ -1,28 +1,31 @@
-import { PlayIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ColorButton } from "../ColorButton";
 import { TemplateButtonProps } from "./type";
+import { PlayIcon } from "@heroicons/react/24/outline";
 
-export const TemplatesButton = ({
+export const TemplateButton = ({
   onDelete,
   onApply,
   children,
-  ...colorButtonProps
+  color,
 }: TemplateButtonProps) => {
   return (
-    <div className="flex items-center gap-x-2 p-2 hover:bg-gray-100 rounded-md">
-      <ColorButton {...colorButtonProps} asChild>
+    <div className="flex items-center gap-x-2 p-2 hover:bg-gray-100 border-gray-100 border rounded-md">
+      <ColorButton color={color} asChild>
         {children}
       </ColorButton>
 
       <button
-        className="p-2 rounded-full hover:bg-gray-200"
+        className="p-2 rounded-full hover:bg-gray-200 active:bg-gray-300 active:text-gray-700 flex items-center gap-x-1 text-gray-500"
         onClick={onApply}
-        title={`${children}を予定に反映`}
+        title={`${children}を反映`}
       >
         <PlayIcon height={16} width={16} />
+        <span>適用</span>
       </button>
+
       <button
-        className="p-2 rounded-full hover:bg-gray-200"
+        className="p-2 rounded-full hover:bg-gray-200 active:bg-gray-300 active:text-gray-700 text-gray-500"
         onClick={onDelete}
         title={`${children}を削除`}
       >

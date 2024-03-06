@@ -3,4 +3,5 @@ export type ColorButtonProps = {
   color: string;
   children?: string;
   asChild?: boolean;
+  border?: boolean;
 };

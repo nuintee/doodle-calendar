@@ -12,7 +12,7 @@ import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import { InformationCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 import { version } from "../package.json";
-import { TemplatesButton } from "./ui/TemplateButton";
+import { TemplateButton } from "./ui/TemplateButton";
 
 function App() {
   const [inputValue, setInputValue] = useState<DecorationTemplate>({
@@ -123,14 +123,14 @@ function App() {
       <div className="bg-gray-300 w-full h-px"></div>
       <div className="flex flex-col gap-y-2 overflow-auto">
         {templates.map((template) => (
-          <TemplatesButton
+          <TemplateButton
             color={template.hex}
             key={template.hex}
-            onDelete={() => {}}
+            onDelete={() => alert("del")}
             onApply={() => sendMessage(template)}
           >
             {template.label}
-          </TemplatesButton>
+          </TemplateButton>
         ))}
       </div>
     </div>
