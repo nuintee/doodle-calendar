@@ -1,10 +1,7 @@
 import { FC, ReactNode, createContext, useEffect, useState } from 'react';
 import { DecorationTemplate } from '../types';
-import {
-  appendStorageTemplate,
-  clearStorageTemplates,
-  getStorageTemplates
-} from '../utils/storage';
+import { getStorageTemplates } from '../utils/storage';
+import { sendMessage } from '../utils/message';
 
 export const TemplatesContext = createContext<{
   templates: DecorationTemplate[];
@@ -23,6 +20,7 @@ export const TemplatesProvider: FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     const init = async () => {
+      // NOTE: なぜかonMessageEventのreplyでうまく返せないのでここのみ直接取得
       const savedTemplates = await getStorageTemplates();
 
       setTemplates((prev) => [
@@ -55,7 +53,7 @@ export const TemplatesProvider: FC<{ children: ReactNode }> = ({
       inputValue
     ]);
 
-    await appendStorageTemplate(inputValue);
+    sendMessage('ADD', inputValue);
   };
 
   const clearTemplates = async () => {
@@ -65,7 +63,7 @@ export const TemplatesProvider: FC<{ children: ReactNode }> = ({
 
     setTemplates([]);
 
-    await clearStorageTemplates();
+    sendMessage('CLEAR', null);
   };
 
   return (

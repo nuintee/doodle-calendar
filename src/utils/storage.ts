@@ -4,6 +4,7 @@ export const STORAGE_KEY = 'g-calendar-ext:template';
 
 export const getStorageTemplates = async (): Promise<DecorationTemplate[]> => {
   const storage = await chrome.storage.local.get();
+
   return storage[STORAGE_KEY] || [];
 };
 

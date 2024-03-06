@@ -43,7 +43,7 @@ function App() {
             color={template.hex}
             key={template.hex}
             onDelete={() => alert('del')}
-            onApply={() => sendMessage(template)}
+            onApply={() => sendMessage('APPLY', template)}
           >
             {template.label}
           </TemplateButton>

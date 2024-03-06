@@ -1,4 +1,4 @@
-import { DecorationTemplate } from '../types';
+import { CustomMessageEvent, DecorationTemplate } from '../types';
 import {
   createDropdown,
   getDropdownDOM,
@@ -7,8 +7,12 @@ import {
   setColor,
   setDropdown
 } from '../utils/dom';
-import { MESSAGE_KEY } from '../utils/message';
-import { STORAGE_KEY, getStorageTemplates } from '../utils/storage';
+import {
+  STORAGE_KEY,
+  appendStorageTemplate,
+  clearStorageTemplates,
+  getStorageTemplates
+} from '../utils/storage';
 
 const app = document.createElement('div');
 app.id = 'selector-app';
@@ -51,16 +55,24 @@ chrome.storage.local.onChanged.addListener((storage) => {
   setDropdown(data.newValue);
 });
 
-chrome.runtime.onMessage.addListener(function (request) {
-  const template = JSON.parse(request)?.[MESSAGE_KEY] as
-    | DecorationTemplate
-    | undefined;
+chrome.runtime.onMessage.addListener(async function (
+  request: CustomMessageEvent
+) {
+  if (request.event === 'APPLY') {
+    const template = request?.payload;
 
-  const input = getInputDOM();
+    const input = getInputDOM();
 
-  if (!input || !template) return;
+    if (!input || !template) return;
 
-  input.value = template.label;
+    input.value = template.label;
 
-  setColor(template.hex);
+    setColor(template.hex);
+  } else if (request.event === 'ADD') {
+    await appendStorageTemplate(request.payload);
+  } else if (request.event === 'DELETE') {
+    //
+  } else if (request.event === 'CLEAR') {
+    await clearStorageTemplates();
+  }
 });
