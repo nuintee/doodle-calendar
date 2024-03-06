@@ -15,7 +15,7 @@ export const ColorButton = ({
       onClick={onClick}
     >
       <div
-        className="size-5 rounded-full"
+        className="size-5 rounded-full aspect-square"
         style={{ backgroundColor: color }}
       ></div>
       {children}

@@ -32,10 +32,12 @@ export const ColorPicker = ({
 
   return (
     <details
-      className="relative p-2 hover:bg-gray-100 rounded-md cursor-pointer group"
+      className="relative group"
       ref={noCloseRef}
+      title="テンプレート色の設定"
+      aria-label="テンプレート色の設定"
     >
-      <summary className="marker:hidden list-none">
+      <summary className="marker:hidden list-none p-2 hover:bg-gray-100 rounded-md cursor-pointer">
         <ColorButton color={colorState || ""} asChild />
       </summary>
       <div className="absolute w-[100px] p-2 right-0 grid grid-cols-2 gap-2 bg-white border">

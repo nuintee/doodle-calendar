@@ -65,7 +65,7 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col gap-y-2 p-2 w-[350px]">
+    <div className="flex flex-col gap-y-2 p-2 w-[350px] h-[400px] overflow-hidden">
       <div className="flex items-center gap-x-1">
         <input
           type="text"
@@ -85,13 +85,15 @@ function App() {
           <button
             className="px-4 py-2 enabled:hover:bg-red-100 rounded-md text-white shrink-0"
             onClick={clearData}
+            title="全テンプレートの削除"
+            aria-label="全テンプレートの削除"
           >
             🗑️
           </button>
         )}
       </div>
       <div className="bg-gray-300 w-full h-px"></div>
-      <div className="flex flex-col gap-y-2">
+      <div className="flex flex-col gap-y-2 overflow-auto">
         {templates.map((template) => (
           <ColorButton
             onClick={() => sendMessage(template)}
