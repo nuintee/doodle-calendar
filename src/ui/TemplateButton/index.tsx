@@ -10,13 +10,13 @@ export const TemplateButton = ({
   color,
 }: TemplateButtonProps) => {
   return (
-    <div className="flex items-center gap-x-2 p-2 hover:bg-gray-100 border-gray-100 border rounded-md">
+    <div className="flex items-center gap-x-2 rounded-md border border-gray-100 p-2 hover:bg-gray-100">
       <ColorButton color={color} asChild>
         {children}
       </ColorButton>
 
       <button
-        className="p-2 rounded-full hover:bg-gray-200 active:bg-gray-300 active:text-gray-700 flex items-center gap-x-1 text-gray-500"
+        className="flex items-center gap-x-1 rounded-full p-2 text-gray-500 hover:bg-gray-200 active:bg-gray-300 active:text-gray-700"
         onClick={onApply}
         title={`${children}を反映`}
       >
@@ -25,7 +25,7 @@ export const TemplateButton = ({
       </button>
 
       <button
-        className="p-2 rounded-full hover:bg-gray-200 active:bg-gray-300 active:text-gray-700 text-gray-500"
+        className="rounded-full p-2 text-gray-500 hover:bg-gray-200 active:bg-gray-300 active:text-gray-700"
         onClick={onDelete}
         title={`${children}を削除`}
       >

@@ -69,12 +69,12 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col gap-y-2 p-2 w-[400px] h-[400px] overflow-hidden">
+    <div className="flex size-[400px] flex-col gap-y-2 overflow-hidden p-2">
       <div className="flex items-center gap-x-2">
-        <div className="flex items-center flex-1 gap-x-1 border rounded-md border-gray-300 px-2 py-1">
+        <div className="flex flex-1 items-center gap-x-1 rounded-md border border-gray-300 px-2 py-1">
           <input
             type="text"
-            className="flex-1 text-base caret-gray-500 block outline-none"
+            className="block flex-1 text-base caret-gray-500 outline-none"
             placeholder="予定テンプレート名を入力"
             value={inputValue.label}
             onKeyDown={(e) => e.key === "Enter" && addTemplates()}
@@ -87,40 +87,40 @@ function App() {
             onColorChange={(hex) => setInputValue((prev) => ({ ...prev, hex }))}
           />
         </div>
-        <details className="p-1 relative">
-          <summary className="marker:hidden list-none cursor-pointer">
+        <details className="relative p-1">
+          <summary className="cursor-pointer list-none marker:hidden">
             <EllipsisVerticalIcon
               height={24}
               width={24}
               className="fill-gray-500"
             />
           </summary>
-          <div className="absolute w-[200px] p-2 right-0 flex flex-col gap-y-2 bg-white border border-gray-100 shadow-sm rounded-md">
+          <div className="absolute right-0 flex w-[200px] flex-col gap-y-2 rounded-md border border-gray-100 bg-white p-2 shadow-sm">
             <button
-              className="p-2 flex items-center gap-x-1 text-start enabled:hover:bg-gray-100 text-gray-500 rounded-md shrink-0"
+              className="flex shrink-0 items-center gap-x-1 rounded-md p-2 text-start text-gray-500 enabled:hover:bg-gray-100"
               onClick={() => {}}
             >
               <InformationCircleIcon height={24} width={24} />
               使い方
             </button>
             <button
-              className="p-2 flex items-center gap-x-1 text-start enabled:hover:bg-red-100 text-red-500 rounded-md shrink-0"
+              className="flex shrink-0 items-center gap-x-1 rounded-md p-2 text-start text-red-500 enabled:hover:bg-red-100"
               onClick={clearData}
               disabled={!templates.length}
             >
               <TrashIcon height={24} width={24} />
               全テンプレートの削除
             </button>
-            <p className="px-4 py-2 w-full text-center">
+            <p className="w-full px-4 py-2 text-center">
               バージョン: {version}
             </p>
           </div>
         </details>
       </div>
-      <span className="text-xs text-gray-500 mt-2">
+      <span className="mt-2 text-xs text-gray-500">
         保存済みの予定テンプレート
       </span>
-      <div className="bg-gray-300 w-full h-px"></div>
+      <div className="h-px w-full bg-gray-300"></div>
       <div className="flex flex-col gap-y-2 overflow-auto">
         {templates.map((template) => (
           <TemplateButton

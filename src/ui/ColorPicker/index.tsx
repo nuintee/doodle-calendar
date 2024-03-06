@@ -32,15 +32,15 @@ export const ColorPicker = ({
 
   return (
     <details
-      className="relative group"
+      className="group relative"
       ref={noCloseRef}
       title="テンプレート色の設定"
       aria-label="テンプレート色の設定"
     >
-      <summary className="marker:hidden list-none p-2 hover:bg-gray-100 rounded-md cursor-pointer">
+      <summary className="cursor-pointer list-none rounded-md p-2 marker:hidden hover:bg-gray-100">
         <ColorButton color={colorState || ""} asChild />
       </summary>
-      <div className="absolute w-[100px] p-2 right-0 grid grid-cols-2 gap-2 bg-white border border-gray-100 rounded-md shadow-sm">
+      <div className="absolute right-0 grid w-[100px] grid-cols-2 gap-2 rounded-md border border-gray-100 bg-white p-2 shadow-sm">
         {CALENDAR_COLORS.map((color) => (
           <ColorButton
             color={color.hex}
