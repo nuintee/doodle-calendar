@@ -1,20 +1,18 @@
-import { useState } from 'react';
 import { sendMessage } from './utils/message';
-import { DecorationTemplate } from './types';
 import { ColorPicker } from './ui/ColorPicker';
-import { getCalendarColor } from './utils/colors';
 
 import { TemplateButton } from './ui/TemplateButton';
 import { GlobalContextMenu } from './ui/GlobalContextMenu';
 import { useTemplates } from './hooks/useTemplates';
+import { useTemplateForm } from './hooks/useTemplateForm';
 
 function App() {
-  const [inputValue, setInputValue] = useState<DecorationTemplate>({
-    hex: getCalendarColor('グラファイト'),
-    label: ''
-  });
-
   const { templates, addTemplates } = useTemplates();
+
+  const { handleKeyDown, handleChange, handleColorChange, inputValue } =
+    useTemplateForm({
+      onEnter: addTemplates
+    });
 
   return (
     <div className="flex size-[400px] flex-col gap-y-2 overflow-hidden p-2">
@@ -25,14 +23,12 @@ function App() {
             className="block flex-1 text-base caret-gray-500 outline-none"
             placeholder="予定テンプレート名を入力"
             value={inputValue.label}
-            onKeyDown={(e) => e.key === 'Enter' && addTemplates(inputValue)}
-            onChange={(e) =>
-              setInputValue((prev) => ({ ...prev, label: e.target.value }))
-            }
+            onKeyDown={handleKeyDown}
+            onChange={handleChange}
           />
           <ColorPicker
             defaultColor={inputValue.hex}
-            onColorChange={(hex) => setInputValue((prev) => ({ ...prev, hex }))}
+            onColorChange={handleColorChange}
           />
         </div>
         <GlobalContextMenu />

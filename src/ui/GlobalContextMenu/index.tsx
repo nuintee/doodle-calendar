@@ -27,7 +27,6 @@ export const GlobalContextMenu = () => {
         <button
           className="flex shrink-0 items-center gap-x-1 rounded-md p-2 text-start text-red-500 enabled:hover:bg-red-100"
           onClick={clearTemplates}
-          disabled={false}
         >
           <TrashIcon height={24} width={24} />
           全テンプレートの削除
