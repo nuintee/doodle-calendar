@@ -9,6 +9,8 @@ import { DecorationTemplate } from "./types";
 import { ColorPicker } from "./ui/ColorPicker";
 import { ColorButton } from "./ui/ColorButton";
 import { getCalendarColor } from "./utils/colors";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
+import { InformationCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 function App() {
   const [inputValue, setInputValue] = useState<DecorationTemplate>({
@@ -81,7 +83,33 @@ function App() {
           defaultColor={inputValue.hex}
           onColorChange={(hex) => setInputValue((prev) => ({ ...prev, hex }))}
         />
-        {Boolean(templates.length) && (
+        <details className="p-1 relative">
+          <summary className="marker:hidden list-none cursor-pointer">
+            <EllipsisVerticalIcon
+              height={24}
+              width={24}
+              className="fill-gray-500"
+            />
+          </summary>
+          <div className="absolute w-[200px] p-2 right-0 flex flex-col gap-y-2 bg-white border border-gray-100 shadow-sm rounded-md">
+            <button
+              className="px-4 flex items-center gap-x-1 text-start py-2 enabled:hover:bg-gray-100 text-gray-500 rounded-md shrink-0"
+              onClick={() => {}}
+            >
+              <InformationCircleIcon height={24} width={24} />
+              使い方
+            </button>
+            <button
+              className="px-4 flex items-center gap-x-1 text-start py-2 enabled:hover:bg-red-100 text-red-500 rounded-md shrink-0"
+              onClick={clearData}
+              disabled={!templates.length}
+            >
+              <TrashIcon height={24} width={24} />
+              全テンプレートの削除
+            </button>
+          </div>
+        </details>
+        {/* {Boolean(templates.length) && (
           <button
             className="px-4 py-2 enabled:hover:bg-red-100 rounded-md text-white shrink-0"
             onClick={clearData}
@@ -90,7 +118,7 @@ function App() {
           >
             🗑️
           </button>
-        )}
+        )} */}
       </div>
       <div className="bg-gray-300 w-full h-px"></div>
       <div className="flex flex-col gap-y-2 overflow-auto">
