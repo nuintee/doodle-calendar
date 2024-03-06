@@ -18,7 +18,9 @@ export const ColorButton = ({
         className="size-5 rounded-full aspect-square"
         style={{ backgroundColor: color }}
       ></div>
-      {children}
+      <span className="truncate whitespace-nowrap text-start flex-1">
+        {children}
+      </span>
     </Tag>
   );
 };

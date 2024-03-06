@@ -10,7 +10,11 @@ import { ColorPicker } from "./ui/ColorPicker";
 import { ColorButton } from "./ui/ColorButton";
 import { getCalendarColor } from "./utils/colors";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
-import { InformationCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
+import {
+  InformationCircleIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
 
 import { version } from "../package.json";
 
@@ -71,6 +75,7 @@ function App() {
   return (
     <div className="flex flex-col gap-y-2 p-2 w-[350px] h-[400px] overflow-hidden">
       <div className="flex items-center gap-x-1">
+        <PlusIcon height={16} width={16} className="text-gray-500" />
         <input
           type="text"
           className="flex-1 text-base caret-gray-500 block outline-none"
