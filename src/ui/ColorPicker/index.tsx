@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CALENDAR_COLORS, ColorHex } from '../../constants/colors';
 import { ColorButton } from '../ColorButton';
 import { ColorPickerProps } from './type';
-import { useClickOutside } from '../../hooks/useClickOutsite';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 export const ColorPicker = ({
   onColorChange,
