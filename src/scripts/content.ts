@@ -7,13 +7,7 @@ import {
   setColor,
   setDropdown
 } from '../utils/dom';
-import {
-  STORAGE_KEY,
-  appendStorageTemplate,
-  clearStorageTemplates,
-  getStorageTemplates,
-  removeStorageTemplate
-} from '../utils/storage';
+import { STORAGE_KEY, getStorageTemplates } from '../utils/storage';
 
 const app = document.createElement('div');
 app.id = 'selector-app';
@@ -69,16 +63,5 @@ chrome.runtime.onMessage.addListener(async function (
     input.value = template.label;
 
     setColor(template.hex);
-  } else if (request.event === 'ADD') {
-    await appendStorageTemplate(request.payload);
-  } else if (request.event === 'DELETE') {
-    const template = request.payload;
-    const removedTemplates = await removeStorageTemplate(template);
-
-    if (removedTemplates.length) return;
-
-    getDropdownDOM()?.remove();
-  } else if (request.event === 'CLEAR') {
-    await clearStorageTemplates();
   }
 });

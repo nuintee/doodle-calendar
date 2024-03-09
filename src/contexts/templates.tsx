@@ -1,6 +1,11 @@
 import { FC, ReactNode, createContext, useEffect, useState } from 'react';
 import { DecorationTemplate } from '../types';
-import { getStorageTemplates } from '../utils/storage';
+import {
+  appendStorageTemplate,
+  clearStorageTemplates,
+  getStorageTemplates,
+  removeStorageTemplate
+} from '../utils/storage';
 import { sendMessage } from '../utils/message';
 
 export const TemplatesContext = createContext<{
@@ -57,7 +62,7 @@ export const TemplatesProvider: FC<{ children: ReactNode }> = ({
       inputValue
     ]);
 
-    sendMessage('ADD', inputValue);
+    appendStorageTemplate(inputValue);
   };
 
   const removeTemplate = async (inputValue: DecorationTemplate) => {
@@ -70,7 +75,8 @@ export const TemplatesProvider: FC<{ children: ReactNode }> = ({
         (template) => JSON.stringify(template) !== JSON.stringify(inputValue)
       )
     );
-    sendMessage('DELETE', inputValue);
+
+    removeStorageTemplate(inputValue);
   };
 
   const clearTemplates = async () => {
@@ -80,7 +86,7 @@ export const TemplatesProvider: FC<{ children: ReactNode }> = ({
 
     setTemplates([]);
 
-    sendMessage('CLEAR', null);
+    clearStorageTemplates();
   };
 
   const applyTemplate = (inputValue: DecorationTemplate) => {
