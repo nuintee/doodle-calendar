@@ -21,5 +21,10 @@ export const useClickOutside = <T extends HTMLElement>({
     init();
   }, [onClickOutside]);
 
-  return { noCloseRef };
+  const closeWith = (callback: () => unknown) => {
+    onClickOutside(noCloseRef);
+    callback();
+  };
+
+  return { noCloseRef, closeWith };
 };

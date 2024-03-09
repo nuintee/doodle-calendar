@@ -10,12 +10,13 @@ export const ColorPicker = ({
 }: ColorPickerProps) => {
   const [colorState, setColorState] = useState(defaultColor);
 
-  const handleClick = (hex: ColorHex) => {
-    setColorState(hex);
-    onColorChange(hex);
-  };
+  const handleClick = (hex: ColorHex) =>
+    closeWith(() => {
+      setColorState(hex);
+      onColorChange(hex);
+    });
 
-  const { noCloseRef } = useClickOutside<HTMLDetailsElement>({
+  const { noCloseRef, closeWith } = useClickOutside<HTMLDetailsElement>({
     onClickOutside: (ref) => {
       if (!ref.current) return;
 
