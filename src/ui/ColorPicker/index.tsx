@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { CALENDAR_COLORS, ColorHex } from '../../constants/colors';
 import { ColorButton } from '../ColorButton';
 import { ColorPickerProps } from './type';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 export const ColorPicker = ({
   onColorChange,
@@ -9,26 +10,18 @@ export const ColorPicker = ({
 }: ColorPickerProps) => {
   const [colorState, setColorState] = useState(defaultColor);
 
-  const noCloseRef = useRef<HTMLDetailsElement | null>(null);
-
   const handleClick = (hex: ColorHex) => {
     setColorState(hex);
     onColorChange(hex);
   };
 
-  useEffect(() => {
-    const init = () => {
-      document.addEventListener('click', (e) => {
-        const isDescendant = noCloseRef.current?.contains(e.target as Node);
+  const { noCloseRef } = useClickOutside<HTMLDetailsElement>({
+    onClickOutside: (ref) => {
+      if (!ref.current) return;
 
-        if (isDescendant || !noCloseRef.current) return;
-
-        noCloseRef.current.open = false;
-      });
-    };
-
-    init();
-  }, []);
+      ref.current.open = false;
+    }
+  });
 
   return (
     <details
