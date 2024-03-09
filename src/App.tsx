@@ -41,7 +41,7 @@ function App() {
         {templates.map((template) => (
           <TemplateButton
             color={template.hex}
-            key={template.hex}
+            key={`${template.label}-${template.hex}`}
             onDelete={() => removeTemplate(template)}
             onApply={() => applyTemplate(template)}
           >

@@ -1,4 +1,4 @@
-import { CALENDAR_COLORS, ColorHex, ColorLabel } from '../constants/colors';
+import { ColorHex } from '../constants/colors';
 import { DecorationTemplate } from '../types';
 
 const DROPDOWN_ID = 'template-dropdown';
@@ -120,7 +120,7 @@ export const setDropdown = (options: DecorationTemplate[]) => {
   });
 };
 
-export const setColor = (key: ColorLabel | ColorHex) => {
+export const setColor = (key: ColorHex) => {
   const tabPanel = document.querySelector('div[role="tabpanel"]');
   const tabPanelSpan = tabPanel?.querySelector('span');
 
@@ -131,30 +131,21 @@ export const setColor = (key: ColorLabel | ColorHex) => {
   // 色セクションを開く
   colorSectionTrigger?.click();
 
-  const colorTrigger = colorSection?.querySelector(
-    `div[id] > 
-     div > 
-     div:first-child >
-     div >
-     div[data-dragsource-ignore="true"] >
-     div:last-child >
-     div:last-child >
-     div:first-child >
-     span >
-     button
-    `
-  ) as HTMLButtonElement | null | undefined;
+  const colorSelectButton = document.querySelector(
+    `button[aria-describedby][aria-haspopup="menu"][data-tooltip-enabled]`
+  ) as HTMLButtonElement;
 
-  // 色ポップアップ表示ボタンのクリック
-  colorTrigger?.click();
+  colorSelectButton?.click();
 
-  const colorButtons = document.querySelectorAll(
-    'div[data-color][role="menuitemradio"]'
+  const targetColors = document.querySelectorAll(
+    `div[tabindex="0"][data-color="${key}"][role="menuitemradio"]`
   );
 
-  const colorIndex = CALENDAR_COLORS.findIndex(
-    (color) => color.label === key || color.hex === key
-  );
+  const targetColor = targetColors[
+    targetColors.length - 1
+  ] as HTMLButtonElement; // Last item
 
-  (colorButtons[colorIndex] as HTMLButtonElement).click();
+  console.log({ targetColors, targetColor });
+
+  targetColor.click();
 };
