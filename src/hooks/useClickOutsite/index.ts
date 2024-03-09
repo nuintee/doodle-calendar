@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { UseClickOutsideProps } from './type';
 
 export const useClickOutside = <T extends HTMLElement>({
   onClickOutside
-}: {
-  onClickOutside: (ref: React.RefObject<T>) => void;
-}) => {
+}: UseClickOutsideProps<T>) => {
   const noCloseRef = useRef<T>(null);
 
   useEffect(() => {

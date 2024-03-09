@@ -3,7 +3,7 @@ import { EllipsisVerticalIcon } from '@heroicons/react/24/solid';
 
 import { version } from '../../../package.json';
 import { useTemplates } from '../../hooks/useTemplates';
-import { useClickOutside } from '../../hooks/useClickOutside';
+import { useClickOutside } from '../../hooks/useClickOutsite';
 
 export const GlobalContextMenu = () => {
   const { clearTemplates } = useTemplates();

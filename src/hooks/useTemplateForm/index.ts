@@ -1,13 +1,10 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
-import { DecorationTemplate } from '../types';
-import { getCalendarColor } from '../utils/colors';
-import { ColorPickerProps } from '../ui/ColorPicker/type';
+import { DecorationTemplate } from '../../types';
+import { getCalendarColor } from '../../utils/colors';
+import { ColorPickerProps } from '../../ui/ColorPicker/type';
+import { UseTemplateFormProp } from './type';
 
-type useTemplateFormProp = {
-  onEnter?: (inputValue: DecorationTemplate) => void;
-};
-
-export const useTemplateForm = ({ onEnter }: useTemplateFormProp) => {
+export const useTemplateForm = ({ onEnter }: UseTemplateFormProp) => {
   const [inputValue, setInputValue] = useState<DecorationTemplate>({
     hex: getCalendarColor('グラファイト'),
     label: ''
