@@ -13,9 +13,10 @@ const app = document.createElement('div');
 app.id = 'selector-app';
 
 const observer = new MutationObserver(async function () {
-  const input = getInputDOM();
+  const inputDOM = getInputDOM();
+  const dropdownDOM = getDropdownDOM();
 
-  if (!input) return;
+  if (!inputDOM) return;
 
   const savedTemplates = await getStorageTemplates();
 
@@ -24,7 +25,7 @@ const observer = new MutationObserver(async function () {
   const dropdown = createDropdown(savedTemplates);
   const rootParent = getInputRootParentDOM();
 
-  if (!rootParent) return;
+  if (!rootParent || !!dropdownDOM) return;
 
   rootParent.style.height = '100%';
   rootParent.style.padding = '1rem 0px';
