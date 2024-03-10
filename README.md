@@ -1,5 +1,7 @@
 # Doodle Calendar
 
+<image src="public/images/logo.png" alt="Doodle Calendarのロゴ" height = 48 width = 48>
+
 ### 概要
 
 Googleカレンダーの予定テンプレート管理用Chrome拡張機能
