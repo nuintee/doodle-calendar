@@ -1,41 +1,38 @@
-# アプリ名候補
+# Doodle Calendar
 
-doodle calendar
+### 概要
 
-- テンプレートを作成できる
-- 遊んでいてイタズラ書きに通ずるところがある
+Googleカレンダーの予定テンプレート管理用Chrome拡張機能
 
-# React + TypeScript + Vite
+※ 予定テンプレートとは保存した固定の予定色と名前のセットです。
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 出来ること
 
-Currently, two official plugins are available:
+- Googleカレンダー予定の色と名前のテンプレート作成
+- Googleカレンダーの予定作成画でテンプレートをワンクリック反映
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 使い方
 
-## Expanding the ESLint configuration
+1. Doodle Calendarを拡張機能一覧から起動
+   ![拡張機能を選択](/public//images/howto01.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. テンプレートを作成 \
+   任意の名前・色を選択してEnterキーでテンプレートを保存
 
-- Configure the top-level `parserOptions` property like this:
+   ![テンプレート作成](/public//images/howto02.png)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname
-  }
-};
-```
+3. テンプレートを反映 \
+    Googleカレンダーへの反映方法は2パターンです \
+    a. 先ほど追加したテンプレートの「予定へ反映」ボタンをクリック \
+    ![拡張機能から予定へ反映](/public/images/howto03.png)
+   b. Googleカレンダーの予約作成時に追加される「カスタムテンプレート」ボタンから選択
+   ![Googleから予定へ反映](/public/images/howto04.png)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### 注意点
 
-### 参考記事
+- 現在新規予約作成画面のみ対応
+- 作成済み予約更新画面は近日対応予定
 
-https://zenn.dev/hamakou108/articles/6fec7a13d0f857
+### おわりに
+
+バグの報告や機能リクエストはこちらのの[issue](https://github.com/nuintee/doodle-calendar/issues)からお願いします。

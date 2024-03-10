@@ -1,4 +1,7 @@
-import { CustomMessageEventEnums, DecorationTemplate } from '../types';
+import type {
+  CustomMessageEventEnums,
+  DecorationTemplate
+} from '@/types/index';
 
 export const sendMessage = async <T extends CustomMessageEventEnums>(
   event: T,

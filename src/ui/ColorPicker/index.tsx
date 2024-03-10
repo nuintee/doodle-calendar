@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { CALENDAR_COLORS, ColorHex } from '../../constants/colors';
-import { ColorButton } from '../ColorButton';
 import { ColorPickerProps } from './type';
-import { useClickOutside } from '../../hooks/useClickOutside';
+import { CALENDAR_COLORS, ColorHex } from '@/constants/colors';
+import { useClickOutside } from '@/hooks/useClickOutside';
+import { ColorButton } from '@/ui/ColorButton';
 
 export const ColorPicker = ({
   onColorChange,

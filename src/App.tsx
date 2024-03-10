@@ -1,9 +1,8 @@
-import { ColorPicker } from './ui/ColorPicker';
-
-import { TemplateButton } from './ui/TemplateButton';
-import { GlobalContextMenu } from './ui/GlobalContextMenu';
-import { useTemplates } from './hooks/useTemplates';
-import { useTemplateForm } from './hooks/useTemplateForm';
+import { useTemplateForm } from '@/hooks/useTemplateForm';
+import { useTemplates } from '@/hooks/useTemplates';
+import { ColorPicker } from '@/ui/ColorPicker';
+import { GlobalContextMenu } from '@/ui/GlobalContextMenu';
+import { TemplateButton } from '@/ui/TemplateButton';
 
 function App() {
   const { templates, addTemplates, removeTemplate, applyTemplate } =

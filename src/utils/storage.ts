@@ -1,4 +1,4 @@
-import { DecorationTemplate } from '../types';
+import type { DecorationTemplate } from '@/types/index';
 
 export const STORAGE_KEY = 'g-calendar-ext:template';
 
