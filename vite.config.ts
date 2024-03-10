@@ -4,9 +4,8 @@ import { crx, defineManifest } from '@crxjs/vite-plugin';
 
 const manifest = defineManifest({
   manifest_version: 3,
-  name: 'Google Calendar Template',
-  description:
-    'Add the reading time to Chrome Extension documentation articles',
+  name: 'Doodle Calendar',
+  description: 'Googleカレンダーの予定作成テンプレート管理',
   version: '1.0',
   permissions: ['activeTab', 'scripting', 'storage'],
   action: {
