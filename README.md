@@ -19,23 +19,25 @@ Googleカレンダーの予定テンプレート管理用Chrome拡張機能
 ### 使い方
 
 1. Doodle Calendarを拡張機能一覧から起動
-<!-- TODO: 写真を添付 -->
+   ![拡張機能を選択](/public//images/howto01.png)
 
 2. テンプレートを作成 \
-任意の名前・色を選択してEnterキーでテンプレートを保存
-<!-- TODO: 写真を添付 -->
+   任意の名前・色を選択してEnterキーでテンプレートを保存
+
+   ![テンプレート作成](/public//images/howto02.png)
 
 3. テンプレートを反映 \
- Googleカレンダーへの反映方法は2パターンです \
- a. 先ほど追加したテンプレートの「予定へ反映」ボタンをクリック \
- b. Googleカレンダーの予約作成時に追加される「テンプレート選択」ボタンから選択
-<!-- TODO: 写真を添付 -->
+    Googleカレンダーへの反映方法は2パターンです \
+    a. 先ほど追加したテンプレートの「予定へ反映」ボタンをクリック \
+    ![拡張機能から予定へ反映](/public/images/howto03.png)
+   b. Googleカレンダーの予約作成時に追加される「カスタムテンプレート」ボタンから選択
+   ![Googleから予定へ反映](/public/images/howto04.png)
 
 ### 注意点
 
 - 現在新規予約作成画面のみ対応
 - 作成済み予約更新画面は近日対応予定
 
-### 参考記事
+### おわりに
 
-https://zenn.dev/hamakou108/articles/6fec7a13d0f857
+バグの報告や機能リクエストはこちらのの[issue](https://github.com/nuintee/doodle-calendar/issues)からお願いします。
