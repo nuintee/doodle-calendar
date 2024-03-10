@@ -20,7 +20,7 @@ export const TemplateButton = ({
         title={`${children}を反映`}
       >
         <PlayIcon height={16} width={16} />
-        <span>適用</span>
+        <span>予定へ反映</span>
       </button>
 
       <button

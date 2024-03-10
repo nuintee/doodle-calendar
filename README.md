@@ -1,40 +1,42 @@
-# アプリ名候補
+# Doodle Calendar
 
-doodle calendar
+### 概要
 
-- テンプレートを作成できる
-- 遊んでいてイタズラ書きに通ずるところがある
+Googleカレンダーの予定テンプレート管理用Chrome拡張機能
 
-# React + TypeScript + Vite
+※ 予定テンプレートとは保存した固定の予定色と名前のセットです。
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 出来ること
 
-Currently, two official plugins are available:
+- Googleカレンダー予定の色と名前のテンプレート作成
+- Googleカレンダーの予定作成画でテンプレートをワンクリック反映
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 開発経緯
 
-## Expanding the ESLint configuration
+- 前提: 複数案件を抱えている、案件毎に同じ名前と色をつけて対応する時間をカレンダーに追加
+- 毎回手動で入力する手間を減らしたかった
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 使い方
 
-- Configure the top-level `parserOptions` property like this:
+1. Doodle Calendarを拡張機能一覧から起動
+<!-- TODO: 写真を添付 -->
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname
-  }
-};
-```
+2. テンプレートを作成 \
+任意の名前・色を選択してEnterキーでテンプレートを保存
+<!-- TODO: 写真を添付 -->
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+3. テンプレートを反映 \
+ Googleカレンダーへの反映方法は2パターンです \
+ a. 先ほど追加したテンプレートの「予定へ反映」ボタンをクリック \
+ b. Googleカレンダーの予約作成時に追加される「テンプレート選択」ボタンから選択
+<!-- TODO: 写真を添付 -->
+
+### 注意点
+
+- 新規予約作成画面へのみ対応
+- 作成済み予約更新画面には未対応
+
+### その他
 
 ### 参考記事
 
