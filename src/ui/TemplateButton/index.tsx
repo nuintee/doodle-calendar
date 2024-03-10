@@ -1,7 +1,7 @@
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { ColorButton } from '../ColorButton';
 import { TemplateButtonProps } from './type';
 import { PlayIcon } from '@heroicons/react/24/outline';
+import { ColorButton } from '@/ui/ColorButton';
 
 export const TemplateButton = ({
   onDelete,

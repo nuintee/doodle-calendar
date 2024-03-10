@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import { crx, defineManifest } from '@crxjs/vite-plugin';
 
 const manifest = defineManifest({
@@ -27,5 +28,5 @@ const manifest = defineManifest({
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), crx({ manifest })]
+  plugins: [react(), tsconfigPaths(), crx({ manifest })]
 });

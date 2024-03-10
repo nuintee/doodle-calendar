@@ -1,4 +1,8 @@
-import { CALENDAR_COLORS, ColorHex, ColorLabel } from '../constants/colors';
+import {
+  CALENDAR_COLORS,
+  type ColorHex,
+  type ColorLabel
+} from '@/constants/colors';
 
 export const getCalendarColor = (key: ColorHex | ColorLabel) => {
   return (

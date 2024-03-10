@@ -1,12 +1,12 @@
 import { FC, ReactNode, createContext, useEffect, useState } from 'react';
-import { DecorationTemplate } from '../types';
 import {
   appendStorageTemplate,
   clearStorageTemplates,
   getStorageTemplates,
   removeStorageTemplate
-} from '../utils/storage';
-import { sendMessage } from '../utils/message';
+} from '@/utils/storage';
+import { sendMessage } from '@/utils/message';
+import { DecorationTemplate } from '@/types/index';
 
 export const TemplatesContext = createContext<{
   templates: DecorationTemplate[];

@@ -1,5 +1,5 @@
-import { ColorHex } from '../constants/colors';
-import { DecorationTemplate } from '../types';
+import { ColorHex } from '@/constants/colors';
+import { DecorationTemplate } from '@/types/index';
 
 const DROPDOWN_ID = 'template-dropdown';
 

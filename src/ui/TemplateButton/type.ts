@@ -1,4 +1,4 @@
-import { ColorButtonProps } from '../ColorButton/type';
+import { ColorButtonProps } from '@/ui/ColorButton/type';
 
 export type TemplateButtonProps = {
   onDelete: () => void;

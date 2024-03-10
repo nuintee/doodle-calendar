@@ -1,4 +1,4 @@
-import { CustomMessageEvent, DecorationTemplate } from '../types';
+import { CustomMessageEvent, DecorationTemplate } from '@/types/index';
 import {
   createDropdown,
   getDropdownDOM,
@@ -6,8 +6,8 @@ import {
   getInputRootParentDOM,
   setColor,
   setDropdown
-} from '../utils/dom';
-import { STORAGE_KEY, getStorageTemplates } from '../utils/storage';
+} from '@/utils/dom';
+import { STORAGE_KEY, getStorageTemplates } from '@/utils/storage';
 
 const app = document.createElement('div');
 app.id = 'selector-app';

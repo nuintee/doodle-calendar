@@ -1,4 +1,4 @@
-import { ColorHex } from '../constants/colors';
+import { ColorHex } from '@/constants/colors';
 
 export type DecorationTemplate = {
   label: string;
