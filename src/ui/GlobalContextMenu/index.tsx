@@ -18,7 +18,12 @@ export const GlobalContextMenu = () => {
 
   const handleOnDelete = () => closeWith(clearTemplates);
 
-  const handleOnInfo = () => closeWith(() => {});
+  const handleOnInfo = () =>
+    closeWith(() => {
+      chrome.tabs.create({
+        url: `${import.meta.env.VITE_GITHUB_PAGES_URL}/#/?id=使い方`
+      });
+    });
 
   return (
     <details
