@@ -18,7 +18,12 @@ export const GlobalContextMenu = () => {
 
   const handleOnDelete = () => closeWith(clearTemplates);
 
-  const handleOnInfo = () => closeWith(() => {});
+  const handleOnInfo = () =>
+    closeWith(() => {
+      chrome.tabs.create({
+        url: 'https://nuintee.github.io/doodle-calendar/#/?id=使い方'
+      });
+    });
 
   return (
     <details
