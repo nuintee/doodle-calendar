@@ -10,7 +10,7 @@ const manifest = defineManifest({
   version: '1.0',
   permissions: ['activeTab', 'scripting', 'storage'],
   action: {
-    default_popup: 'public/index.html'
+    default_popup: 'index.html'
   },
   icons: {
     '16': 'icons/icon16.png',

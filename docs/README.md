@@ -16,12 +16,12 @@ Googleカレンダーの予定テンプレート管理用Chrome拡張機能
 ### 使い方
 
 1. Doodle Calendarを拡張機能一覧から起動
-   ![拡張機能を選択](/public//images/howto01.png)
+   ![拡張機能を選択](/public/images/howto01.png)
 
 2. テンプレートを作成 \
    任意の名前・色を選択してEnterキーでテンプレートを保存
 
-   ![テンプレート作成](/public//images/howto02.png)
+   ![テンプレート作成](/public/images/howto02.png)
 
 3. テンプレートを反映 \
     Googleカレンダーへの反映方法は2パターンです \
