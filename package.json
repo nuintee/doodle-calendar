@@ -13,7 +13,7 @@
     "format": "prettier --write \"**/*.+(ts|tsx)\"",
     "preview": "vite preview",
     "docs:init": "docsify init ./docs",
-    "docs:sync": "ts-node --esm scripts/sync-readme.ts",
+    "docs:sync": "ts-node --esm scripts/sync-readme.ts && ts-node --esm scripts/sync-public.ts",
     "docs:preview": " docsify serve ./docs"
   },
   "dependencies": {
