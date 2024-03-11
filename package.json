@@ -11,7 +11,9 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write \"**/*.+(ts|tsx)\"",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docsify:init": "docsify init ./docs",
+    "docsify:preview": " docsify serve ./docs"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
@@ -27,6 +29,7 @@
     "@typescript-eslint/parser": "^7.0.2",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.17",
+    "docsify-cli": "^4.4.4",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-hooks": "^4.6.0",
