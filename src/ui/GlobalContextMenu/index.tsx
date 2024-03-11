@@ -21,7 +21,7 @@ export const GlobalContextMenu = () => {
   const handleOnInfo = () =>
     closeWith(() => {
       chrome.tabs.create({
-        url: 'https://nuintee.github.io/doodle-calendar/#/?id=使い方'
+        url: `${import.meta.env.VITE_GITHUB_PAGES_URL}/#/?id=使い方`
       });
     });
 
