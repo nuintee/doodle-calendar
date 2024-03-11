@@ -1,6 +1,8 @@
 # Doodle Calendar
 
-<image src="public/images/logo.png" alt="Doodle Calendarのロゴ" height = 48 width = 48>
+<div style = "padding:1rem;border-radius:10px;background-color:#1E1E1E;width:fit-content;aspect-ratio: 1/1;display:flex;">
+   <image src="public/images/logo.png" alt="Doodle Calendarのロゴ" height = 48 width = 48 >
+</div>
 
 ### 概要
 
