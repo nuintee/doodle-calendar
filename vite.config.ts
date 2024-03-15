@@ -8,7 +8,7 @@ const manifest = defineManifest({
   name: 'Doodle Calendar',
   description: 'Googleカレンダーの予定テンプレート管理',
   version: '1.0',
-  permissions: ['activeTab', 'scripting', 'storage'],
+  permissions: ['tabs', 'storage'],
   action: {
     default_popup: 'index.html'
   },

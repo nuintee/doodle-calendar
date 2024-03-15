@@ -44,4 +44,4 @@ b. Googleカレンダーの予約作成時に追加される「カスタムテ�
 
 ### おわりに
 
-バグの報告や機能リクエストはこちらのの[issue](https://github.com/nuintee/doodle-calendar/issues)からお願いします。
+バグの報告や機能リクエストはこちらの[issue](https://github.com/nuintee/doodle-calendar/issues)からお願いします。
