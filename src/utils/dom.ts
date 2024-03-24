@@ -128,9 +128,10 @@ export const setColor = (key: ColorHex) => {
   const colorSection = allExpandables?.item(allExpandables.length - 1);
   const colorSectionTrigger = colorSection?.querySelector('button');
 
-  // 色セクションを開く
+  // NOTE: 色セクションを開く
   colorSectionTrigger?.click();
 
+  // NOTE: マッチする最初に要素のみ有効
   const colorSelectButton = document.querySelector(
     `button[aria-describedby][aria-haspopup="menu"][data-tooltip-enabled]`
   ) as HTMLButtonElement;
@@ -143,9 +144,7 @@ export const setColor = (key: ColorHex) => {
 
   const targetColor = targetColors[
     targetColors.length - 1
-  ] as HTMLButtonElement; // Last item
-
-  console.log({ targetColors, targetColor });
+  ] as HTMLButtonElement;
 
   targetColor.click();
 };
