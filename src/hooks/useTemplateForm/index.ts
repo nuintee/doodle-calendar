@@ -10,8 +10,11 @@ export const useTemplateForm = ({ onEnter }: UseTemplateFormProp) => {
     label: ''
   });
 
-  const handleKeyDown = (e: KeyboardEvent) =>
-    e.key === 'Enter' && !e.nativeEvent.isComposing && onEnter?.(inputValue);
+  const handleKeyDown = ({ key, nativeEvent }: KeyboardEvent) => {
+    if (key !== 'Enter' || nativeEvent.isComposing) return;
+
+    onEnter?.(inputValue);
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
     setInputValue((prev) => ({ ...prev, label: e.target.value }));
