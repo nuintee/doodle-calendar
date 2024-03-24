@@ -11,7 +11,7 @@ export const useTemplateForm = ({ onEnter }: UseTemplateFormProp) => {
   });
 
   const handleKeyDown = (e: KeyboardEvent) =>
-    e.key === 'Enter' && onEnter?.(inputValue);
+    e.keyCode === 13 && onEnter?.(inputValue);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
     setInputValue((prev) => ({ ...prev, label: e.target.value }));
